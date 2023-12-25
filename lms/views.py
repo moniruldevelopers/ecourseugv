@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from django.contrib.auth import logout
 from .forms import *
+from django.views.decorators.cache import never_cache
 
 
 
@@ -15,6 +16,7 @@ def custom_logout(request):
     messages.success(request, "You are logged out!")
     return redirect('home')
 
+@never_cache
 @login_required
 def profile(request):
     if request.user.is_authenticated:
