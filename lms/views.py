@@ -32,13 +32,27 @@ def profile(request):
 
 
 def home(request):
-    return render(request, 'home.html')
+    author = Author.objects.all()
+    total_author = author.count()
+    
+    course = Course.objects.all()
+    total_course = course.count()
+    enrollments = Enrollment.objects.filter(approved=True)
+    total_enrolled_students = enrollments.count()
+    courses = Course.objects.order_by('-created_date')[:6]
+    context = {
+        'total_enrolled_students':total_enrolled_students,
+        'total_course': total_course,
+        'total_author': total_author,
+        'courses': courses,
+    }
+    return render(request, 'home.html', context)
 
 
 def courses(request):
     queryset = Course.objects.order_by('-created_date')
     page = request.GET.get('page',1)
-    paginator = Paginator(queryset,1)
+    paginator = Paginator(queryset,6)
     try:
         courses = paginator.page(page)
     except EmptyPage:
@@ -55,11 +69,18 @@ def courses(request):
     }
     return render (request, 'courses.html', context)
 @login_required(login_url='profile')
-def course_details(request, slug):
+def course_details(request, slug):   
     course = Course.objects.get(slug=slug)
     enrollments = Enrollment.objects.filter(user=request.user, course=course)
+    total_enroll = Enrollment.objects.filter(course=course)
+    total_enrolled_students = total_enroll.count()
+    context = {
+        'course': course,
+        'enrollments': enrollments,
+        'total_enrolled_students':total_enrolled_students,
+    }
     
-    return render(request, 'course_details.html', {'course': course, 'enrollments': enrollments})
+    return render(request, 'course_details.html', context)
 
 @login_required(login_url='profile')
 def dashboard(request):

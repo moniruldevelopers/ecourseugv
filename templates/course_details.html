@@ -19,7 +19,7 @@
                 <a href="instructor-profile.html"
                   ><img
                     src="{{course.author.image.url}}"
-                    alt="img"
+                    alt="{{course.author.name}}"
                     class="img-fluid"
                 /></a>
               </div>
@@ -38,11 +38,12 @@
           >
             <div class="cou-info">
               <img src="{% static 'assets/img/icon/icon-01.svg' %}" alt />
-              <p>{{course.lesson}} Lesson</p>
+              <p>{{course.videos.all.count }} Lessons</p>
             </div>
             <div class="cou-info">
               <img src="{% static 'assets/img/icon/timer-icon.svg' %}" alt />
-              <p>{{course.duration}} hr</p>
+              <p>{{course.duration}} Hours</p>
+            
             </div>
             <p><i class="fa fa-upload"></i> {{course.created_date}}</p>
 
@@ -79,7 +80,7 @@
                   <h5 class="subs-title">Course Content</h5>
                 </div>
                 <div class="col-sm-6 text-sm-end">
-                  <h6>92 Lectures 10:56:11</h6>
+                  <h6>{{course.videos.all.count }} Lectures {{course.duration}} Hours</h6>
                 </div>
               </div>
               <div class="course-card">
@@ -151,11 +152,11 @@
               <div class="card">
                 <div class="card-body">
                   <a>
-                     <img class src="{{course.banner.url}}" alt />
+                     <img class src="{{course.banner.url}}" alt="{{course.title}}" />
                   </a>
                   <div class="video-details">
                     <div class="course-fee">
-                      <h2>Price: {{course.price}} Tk </h2>                   
+                      <h2>Price: {{course.price}} &#2547; </h2>                   
                     </div>
                     <div class="row gx-2">
                       <div class="col-md-6">
@@ -169,8 +170,9 @@
                         <a href="javascript:;" class="btn btn-wish w-100"
                           ><i class="feather-share-2"></i> Share</a
                         >
-                      </div>
+                      </div>                      
                     </div>
+                    
 
 
 
@@ -206,27 +208,20 @@
                 <ul>
                   <li>
                     <img src="{% static 'assets/img/icon/users.svg' %}" class="me-2" alt />
-                    Enrolled: <span>32 students</span>
+                    Enrolled: <span>{{total_enrolled_students}}</span>
                   </li>
                   <li>
                     <img src="{% static 'assets/img/icon/timer.svg' %}" class="me-2" alt />
-                    Duration: <span>20 hours</span>
-                  </li>
-                  <li>
-                    <img
-                      src="{% static 'assets/img/icon/chapter.svg' %}"
-                      class="me-2"
-                      alt
-                    />
-                    Chapters: <span>15</span>
-                  </li>
+                    Durations: <span>{{course.duration}} Hours</span>
+                   
+                  </li>              
                   <li>
                     <img src="{% static 'assets/img/icon/video.svg' %}" class="me-2" alt />
-                    Video:<span> 12 hours</span>
+                    Video:<span> {{course.videos.all.count }} Lessons</span>
                   </li>
                   <li>
                     <img src="{% static 'assets/img/icon/chart.svg' %}" class="me-2" alt />
-                    Level: <span>Beginner</span>
+                    Level: <span>{{course.skill_level}}</span>
                   </li>
                 </ul>
               </div>

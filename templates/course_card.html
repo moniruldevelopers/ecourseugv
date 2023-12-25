@@ -6,15 +6,16 @@
     <div class="course-box d-flex aos" data-aos="fade-up">
       <div class="product">
         <div class="product-img">
-          <a href="course-details.html">
+          <a href="{% url 'course_details' course.slug %}">
             <img
               class="img-fluid"
-              alt
-              src="{% static 'assets/img/course/course-01.jpg' %}"
+              style="width: 380px; height: 255px;"
+              alt="{{course.title}}"
+              src="{{course.banner.url}}"
             />
           </a>
           <div class="price">
-            <h3>$300 <span>$99.00</span></h3>
+            <h3> {{ course.price }} &#2547;</h3>
           </div>
         </div>
         <div class="product-content">
@@ -22,22 +23,17 @@
             <div class="course-group-img d-flex">
               <a href="instructor-profile.html"
                 ><img
-                  src="{% static 'assets/img/user/user1.jpg' %}"
-                  alt
+                  src="{{course.author.image.url}}"
+                  alt="{{course.author.name}}"
                   class="img-fluid"
               /></a>
               <div class="course-name">
                 <h4>
-                  <a href="instructor-profile.html">Nicole Brown</a>
+                  <a href="instructor-profile.html">{{course.author.name}}</a>
                 </h4>
-                <p>Instructor</p>
+                <p>{{course.author.designation}}</p>
               </div>
-            </div>
-            <div
-              class="course-share d-flex align-items-center justify-content-center"
-            >
-              <a href="#"><i class="fa-regular fa-heart"></i></a>
-            </div>
+            </div>          
           </div>
           <h3 class="title instructor-text">
             <a href="{% url 'course_details' course.slug %}"
@@ -50,33 +46,16 @@
                 src="{% static 'assets/img/icon/icon-01.svg' %}"
                 alt
               />
-              <p>12+ Lesson</p>
+              <p>{{course.videos.all.count }} Lessons</p>
             </div>
             <div class="course-view d-flex align-items-center">
               <img
                 src="{% static 'assets/img/icon/icon-02.svg' %}"
                 alt
               />
-              <p>9hr 30min</p>
+              <p>{{course.duration}} Hours</p>
             </div>
-          </div>
-          <div class="rating">
-            <i class="fas fa-star filled"></i>
-            <i class="fas fa-star filled"></i>
-            <i class="fas fa-star filled"></i>
-            <i class="fas fa-star filled"></i>
-            <i class="fas fa-star"></i>
-            <span class="d-inline-block average-rating"
-              ><span>4.0</span> (15)</span
-            >
-          </div>
-          <div
-            class="all-btn all-category d-flex align-items-center"
-          >
-            <a href="checkout.html" class="btn btn-primary"
-              >BUY NOW</a
-            >
-          </div>
+          </div> 
         </div>
       </div>
     </div>

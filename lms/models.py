@@ -55,7 +55,6 @@ class Course(models.Model):
     category = models.ForeignKey(Category, related_name='course_category', on_delete=models.CASCADE)
     title = models.CharField(max_length=300, unique=True)
     slug = models.SlugField( max_length=350, null=True, blank=True)
-    lesson = models.PositiveIntegerField(default= 0)
     duration = models.PositiveIntegerField(default=0)
     skill_level = models.CharField(max_length=50, choices=SKILL_CHOICES, default=BASIC)
     language = models.CharField(max_length=20, choices=LANGUAGE_CHOOSE, default=BANGLA)

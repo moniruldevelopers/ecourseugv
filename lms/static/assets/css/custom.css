@@ -1,3 +1,8 @@
 .home-slide {   
     min-height: 700px !important;
 }
+
+.price {
+    min-width: 64px !important;
+    padding: 9px 15px;
+}

@@ -32,13 +32,32 @@
                 <i class="fas fa-times"></i>
               </a>
             </div>
-            <ul class="main-nav">
+            <ul class="main-nav">             
               <li class="has-submenu menu-effect active">                
                 <li><a href="{% url 'home' %}">Home <i class="fa-solid fa-house"></i></a></li>
               </li>
               <li class="has-submenu menu-effect active">              
                 <li><a href="{% url 'courses' %}">Courses <i class="fa-solid fa-book-open-reader"></i></a></li>
-              </li>  
+              </li>
+
+              <li class="has-submenu menu-effect">
+                <a href="javascript:void(0)">Category <i class="fa-solid fa-list"></i></a>
+                <ul class="submenu">
+
+                  <li><a href="#">category item</a></li>                 
+               
+                </ul>
+              </li> 
+              
+              <li class="has-submenu menu-effect">
+                <a href="javascript:void(0)">Info <i class="fa-solid fa-circle-info"></i></a>
+                <ul class="submenu">
+                  <li><a href="#">About Us</a></li>                 
+                  <li><a href="#">Contact Us</a></li> 
+                </ul>
+              </li> 
+             
+            
                  
               {% if request.user.is_authenticated %}  
               <li class="has-submenu menu-effect">
@@ -65,4 +84,4 @@
     </div>
   </header>
 
- 
+  

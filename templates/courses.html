@@ -7,23 +7,31 @@
 
 
 {% block content %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha384-Z2nU9KHK+91s1U6PPjdd5IhCuUC3EjtT1aG7eR5i7LXlp9ZDb1kyWe1RCUnuBmFF" crossorigin="anonymous">
+
+
+
+
 
 <section class="section new-course">
-  <div class="container">
-    <div class="section-header aos pt-5" data-aos="fade-up">
-      <div class="section-sub-head">    
-        <h2>Featured Courses</h2>
+  <div class="container">   
+    <div class="row" style="padding-top: 60px;">
+      <div class="col-md-6">
+        <div class="section-sub-head">    
+          <h2>Featured Courses</h2>
+        </div>
       </div>
-     
-    </div>
-    <div class="section-text aos" data-aos="fade-up">
-      <p class="mb-0">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget
-        aenean accumsan bibendum gravida maecenas augue elementum et
-        neque. Suspendisse imperdiet.
-      </p>
-    </div>
+      <div class="col-md-6">
+        <form class="form-inline">
+          <div class="input-group align-items-stretch">
+              <input type="text" class="form-control" placeholder="Search Course,Category, Author etc  ">
+              <div class="input-group-append">
+                  <button style="line-height: 2;" class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+              </div>
+          </div>
+      </form>
+      </div>
+    </div>   
+  
     <div class="course-feature">
       <div class="row">
         {% include 'course_card.html' %}   
