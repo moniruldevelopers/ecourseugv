@@ -137,7 +137,7 @@ body{
 </style>
 
 
-<h2 class="heading" style="margin-top: 110px;">Course Playlist</h2>
+<h2 class="heading" style="margin-top: 110px;">Course Playlist {{course.title}}</h2>
     
 
 
@@ -145,19 +145,34 @@ body{
 <div class="container" style="margin-bottom: 50px;">
     <div class="main-video">
         <div class="video">
-            <video id="mainVideo" controls muted autoplay></video>
+            <video oncontextmenu="return false;" id="mainVideo" controls muted autoplay></video>
             <h3 id="mainVideoTitle" class="title"></h3>
         </div>
     </div>
     <div class="video-list">
         {% for video in course.videos.all %}
             <div class="vid{% if forloop.first %} active{% endif %}">
-                <video class="playlist-video" src="{{ video.video_file.url }}" muted></video>
+                <video oncontextmenu="return false;" class="playlist-video" src="{{ video.video_file.url }}" muted></video>
                 <h3 class="title">{{ forloop.counter }}. {{ video.title }}</h3>
             </div>
         {% endfor %}
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <script>
@@ -181,37 +196,11 @@ body{
 
     });
 
-</script> 
+</script>  
 
 
 
 
-
-
-
-<!-- <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const mainVideo = document.getElementById('mainVideo');
-    const mainVideoTitle = document.getElementById('mainVideoTitle');
-    const playlistVideos = document.querySelectorAll('.playlist-video');
-    
-    playlistVideos.forEach(function(video, index) {
-        video.addEventListener('click', function() {
-            mainVideo.src = video.src;
-            mainVideo.play();
-            mainVideoTitle.innerText = `${index + 1}. ${video.nextElementSibling.innerText}`;
-            
-            // Remove 'active' class from all playlist items
-            playlistVideos.forEach(function(vid) {
-                vid.parentElement.classList.remove('active');
-            });
-            
-            // Add 'active' class to the clicked playlist item
-            video.parentElement.classList.add('active');
-        });
-    });
-});
-</script> -->
 
 
 {% endblock content %}

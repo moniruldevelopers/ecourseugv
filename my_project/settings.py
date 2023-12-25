@@ -18,7 +18,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "192.168.0.107","127.0.0.1"]
 
-#python manage.py runserver 192.168.0.102:8000
+#python manage.py runserver 192.168.0.107:8000
 # Application definition
 
 INSTALLED_APPS = [

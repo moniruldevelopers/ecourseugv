@@ -96,7 +96,7 @@
                             {{ video.title }}
                           </p>
                           <div>                            
-                            <a href="javascript:;" title="Go To your Enrolled Course " class="video-watch" data-src="{{ video.video_file.url }}">Watch Video</a>
+                            <a href="{% url 'dashboard' %}" title="Go To your Enrolled Course " class="video-watch">Go to dashboard</a>
                           </div>
                         </li>
                       {% endfor %}
