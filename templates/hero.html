@@ -3,7 +3,12 @@
     <div class="container">
       <div class="row">
         <div class="col-md-7">
-          <div class="home-slide-face aos" data-aos="fade-up"  >
+          <div class="home-slide-face aos" data-aos="fade-up" style="padding-top: 50px;" >
+            <div class="col-md-5 d-flex align-items-center">
+              <div class="girl-slide-img aos" data-aos="fade-up">
+                <img src="{% static 'assets/demo.webp' %}" alt />
+              </div>
+            </div>
             <div class="home-slide-text">
               
               <h5 style="font-size: 30px;">Unlock Your Potential, Learn at Your Pace.</h5>
@@ -16,7 +21,14 @@
                 
               </div>
             </div>
-            <div class="hero-button py-3" >              
+
+           
+
+            <div class="hero-button py-3" >    
+             
+              
+
+              
             <ul class="nav header-navbar-rht">
               <li class="nav-item">
                 <a class="login-head button" href="{% url 'profile' %}">Login</a>
