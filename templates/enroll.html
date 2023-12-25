@@ -1,0 +1,40 @@
+<!-- enroll.html -->
+
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Checkout Page
+{% endblock title %}
+
+{% block content %}
+
+<style>
+    body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.enroll {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+</style>
+<div class="container enroll" style="margin-top: 120px;">
+    <h2>Enroll Course is <i class="fa-solid fa-arrow-right"></i> {{ course.title }}</h2>
+    <p >Course Price: &#2547; {{ course.price }}  <span style="background-color: red; color:white">Payon Bkash/Nagod:</span> <i class="fa-solid fa-mobile"></i>  01575082901</p>
+
+    <form method="POST" action="{% url 'enroll' slug=course.slug %}">
+        {% csrf_token %}
+        {% crispy form %}
+        <input type="hidden" name="course_price" value="{{ course.price }}">
+    </form>
+</div>
+{% endblock %}
+

@@ -1,0 +1,68 @@
+{% load static %}
+  <header class="header header-two">
+    <div class="header-fixed">
+      <nav class="navbar navbar-expand-lg header-nav scroll-sticky">
+        <div class="container">
+          <div class="navbar-header">
+            <a id="mobile_btn" href="javascript:void(0);">
+              <span class="bar-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </a>
+            <a href="{% url 'home' %}" class="navbar-brand logo">
+              <img src="{% static 'assets/img/logo.svg' %}" class="img-fluid" alt="Logo" />
+            </a>
+          </div>
+          <div class="main-menu-wrapper">
+            <div class="menu-header">
+              <a href="{% url 'home' %}" class="menu-logo">
+                <img
+                  src="{% static 'assets/img/logo.svg' %}"
+                  class="img-fluid"
+                  alt="Logo"
+                />
+              </a>
+              <a
+                id="menu_close"
+                class="menu-close"
+                href="javascript:void(0);"
+              >
+                <i class="fas fa-times"></i>
+              </a>
+            </div>
+            <ul class="main-nav">
+              <li class="has-submenu menu-effect active">                
+                <li><a href="{% url 'home' %}">Home <i class="fa-solid fa-house"></i></a></li>
+              </li>
+              <li class="has-submenu menu-effect active">              
+                <li><a href="{% url 'courses' %}">Courses <i class="fa-solid fa-book-open-reader"></i></a></li>
+              </li>  
+                 
+              {% if request.user.is_authenticated %}  
+              <li class="has-submenu menu-effect">
+                <a href="javascript:void(0)">{{request.user.username}}<i class="fas fa-chevron-down"></i></a>
+                <ul class="submenu">
+                  <li><a href="{% url 'dashboard' %}">Enrolled Courses</a></li>                 
+                  <li><a href="{% url 'custom_logout' %}">Saved Courses</a></li>                 
+                  <li><a href="{% url 'custom_logout' %}">Logout</a></li> 
+                          
+                </ul>
+              </li> 
+              {% else %}           
+              <li class="has-submenu menu-effect active">              
+                <li><a href="{% url 'profile' %}">Sign In <i class="fa-solid fa-right-to-bracket"></i></a></li>
+              </li> 
+              <li class="has-submenu menu-effect active">              
+                <li><a href="{% url 'account_signup' %}">Create Account <i class="fa-solid fa-user-plus"></i></a></li>
+              </li>    
+              {% endif %}            
+            </ul>
+          </div>       
+        </div>
+      </nav>
+    </div>
+  </header>
+
+ 

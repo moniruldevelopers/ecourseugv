@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Dashboard
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="container " style="margin-top: 130px; list-style: none;">
+  <div class="shadow-sm" style="padding: 5px; text-align: center;">
+    <li>Name: {{request.user.username}}</li>  
+    <li>Email: {{request.user.email}}</li>
+   
+  </div>
+ 
+ <section>
+    <h1 style="text-align: center; margin-top:10px;">Enrolled Courses</h1>
+    <div class="row shadow-sm"> 
+        {% if user_enrollments %}
+        <ul>
+            <div class="row">  
+            {% for enrollment in user_enrollments reversed %}
+             <div class="col-lg-3 ">
+                <div class="course-box d-flex aos" data-aos="fade-up">
+                    <div class="product">
+                    <div class="product-img">
+                        <a href="course-details.html">
+                        <img
+                            class="img-fluid"
+                            alt
+                            src="{% static 'assets/img/course/course-01.jpg' %}"
+                        />
+                        </a>
+                        <div class="price">
+                        <h3>$300 <span>$99.00</span></h3>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <div class="course-group d-flex">
+                        <div class="course-group-img d-flex">
+                            <a href="instructor-profile.html"
+                            ><img
+                                src="{% static 'assets/img/user/user1.jpg' %}"
+                                alt
+                                class="img-fluid"
+                            /></a>
+                            <div class="course-name">
+                            <h4>
+                                <a href="instructor-profile.html">Nicole Brown</a>
+                            </h4>
+                            <p>Instructor</p>
+                            </div>
+                        </div>
+                        <div
+                            class="course-share d-flex align-items-center justify-content-center"
+                        >
+                            <a href="#"><i class="fa-regular fa-heart"></i></a>
+                        </div>
+                        </div>
+                        <h3 class="title instructor-text">
+                        <a href="{% url 'course_details' slug=enrollment.course.slug %}"
+                            >{{enrollment.course.title}}</a
+                        >
+                        </h3>
+                        <div class="course-info d-flex align-items-center">
+                        <div class="rating-img d-flex align-items-center">
+                            <img
+                            src="{% static 'assets/img/icon/icon-01.svg' %}"
+                            alt
+                            />
+                            <p>12+ Lesson</p>
+                        </div>
+                        <div class="course-view d-flex align-items-center">
+                            <img
+                            src="{% static 'assets/img/icon/icon-02.svg' %}"
+                            alt
+                            />
+                            <p>9hr 30min</p>
+                        </div>
+                        </div>                 
+                    
+                    </div>
+                    </div>
+                </div>
+            </div>        
+            {% endfor %}           
+        </div> 
+          </ul>
+        {% else %}
+          <p>You are not currently enrolled in any courses.</p>
+        {% endif %}
+      </div>
+     
+     
+ </section>
+</div>
+
+
+
+
+{% endblock content %}
+    
