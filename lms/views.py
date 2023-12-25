@@ -59,7 +59,7 @@ def course_details(request, slug):
     
     return render(request, 'course_details.html', {'course': course, 'enrollments': enrollments})
 
-@login_required
+@login_required(login_url='profile')
 def dashboard(request):
     user_enrollments = Enrollment.objects.filter(user=request.user, approved=True)
     return render(request, 'dashboard.html', {'user_enrollments': user_enrollments})
@@ -69,7 +69,7 @@ def dashboard(request):
 
 # views.py
 
-@login_required
+@login_required(login_url='profile')
 def enroll(request, slug):
     course = Course.objects.get(slug=slug)
 
@@ -89,5 +89,15 @@ def enroll(request, slug):
     return render(request, 'enroll.html', {'course': course, 'form': form})
 
 
+@login_required(login_url='profile')
+def course_playlist(request, course_slug):
+    # Get the course using the provided slug
+    course = get_object_or_404(Course, slug=course_slug)
 
-
+    # Check if the user is enrolled in the specified course
+    if Enrollment.objects.filter(user=request.user, course=course, approved=True).exists():
+        # User is enrolled and approved, render the playlist page
+        return render(request, 'playlist.html', {'course': course})
+    else:
+        # User is not enrolled or not approved, redirect them to another page or show an error message
+        return redirect('courses')  # Redirect to the courses page or another appropriate page

@@ -95,8 +95,8 @@
                             <img src="{% static 'assets/img/icon/play.svg' %}" alt class="me-2" />
                             {{ video.title }}
                           </p>
-                          <div>
-                            <a href="javascript:;" class="video-watch" data-src="{{ video.video_file.url }}">Watch Video</a>
+                          <div>                            
+                            <a href="javascript:;" title="Go To your Enrolled Course " class="video-watch" data-src="{{ video.video_file.url }}">Watch Video</a>
                           </div>
                         </li>
                       {% endfor %}
@@ -178,7 +178,7 @@
                     {% if enrollments.exists %}
                       {% for enrollment in enrollments %}
                         {% if enrollment.approved %}
-                        <a class="btn btn-enroll w-100" href="{% url 'course_details' slug=enrollment.course.slug %}">Already Enrolled (View Course)</a>
+                        <a class="btn btn-enroll w-100" href="{% url 'course_playlist' course_slug=enrollment.course.slug %}">Already Enrolled (View Course)</a>
 
                         {% elif not enrollment.approved %}
                           <button class="btn btn-primary">Your enrollment request is pending approval.</button>
