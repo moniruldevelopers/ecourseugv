@@ -138,11 +138,9 @@ body{
 
 
 <div class="container">
-    <p style="margin-top: 110px;">Course Playlist {{course.title}}</p>
+    <p style="margin-top: 110px;">Course Playlist <img src="{% static 'assets/img/icon/video.svg' %}" class="me-2" alt=""> {{course.title}}</p>
     
 </div>
-
-
     
 <div class="container" style="margin-bottom: 50px;">
     <div class="main-video">
@@ -156,7 +154,15 @@ body{
             <div class="vid{% if forloop.first %} active{% endif %}">
                 <video oncontextmenu="return false;" class="playlist-video" src="{{ video.video_file.url }}" muted></video>
                 <h3 class="title">{{ forloop.counter }}. {{ video.title }}</h3>
-            </div>
+              </div>
+          <ol>
+            <li style="list-style-type: none;">
+               
+                {% if video.class_file.size > 0 %}
+                <img src="{% static 'assets/img/icon/chapter.svg' %}" class="me-2" alt=""> <a href="{{ video.class_file.url }}">Download {{ video.title }} Class File</a>
+                {% endif %}
+                 </li>
+          </ol>
         {% endfor %}
     </div>
 </div>

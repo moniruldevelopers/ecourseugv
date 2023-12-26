@@ -76,7 +76,7 @@ class Video(models.Model):
     title = models.CharField(max_length=150)
     is_preview = models.BooleanField(default=False)
     video_file = models.FileField(upload_to='course_videos/')
-    class_file = models.FileField(upload_to='course_files/')
+    class_file = models.FileField(upload_to='course_files/', null=True, blank=True )
 
     def __str__(self):
         return self.title
