@@ -77,7 +77,8 @@ class Video(models.Model):
     is_preview = models.BooleanField(default=False)
     video_file = models.FileField(upload_to='course_videos/')
     class_file = models.FileField(upload_to='course_files/', null=True, blank=True )
-
+    assignment = models.FileField(upload_to='course_files/', null=True, blank=True )
+    quiz = models.URLField(max_length=500, null=True, blank=True)
     def __str__(self):
         return self.title
 

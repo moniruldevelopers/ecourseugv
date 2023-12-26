@@ -156,12 +156,20 @@ body{
                 <h3 class="title">{{ forloop.counter }}. {{ video.title }}</h3>
               </div>
           <ol>
-            <li style="list-style-type: none;">
-               
+            <li style="list-style-type: none;">               
                 {% if video.class_file.size > 0 %}
-                <img src="{% static 'assets/img/icon/chapter.svg' %}" class="me-2" alt=""> <a href="{{ video.class_file.url }}">Download {{ video.title }} Class File</a>
+                <img src="{% static 'assets/img/icon/chapter.svg' %}" class="me-2" alt=""> <a href="{{video.class_file.url}}">Download {{ forloop.counter }} Lecture file</a><br>
                 {% endif %}
-                 </li>
+                </li>
+                
+                {% if video.assignment %}
+                <img src="{% static 'assets/img/icon/cloud.svg' %}" class="me-2" alt=""><a href="{{video.assignment.url}}">Assignment of Lecture {{ forloop.counter }}   </a><br>
+                {% endif %}
+
+                {% if video.quiz %}
+                <img src="{% static 'assets/img/icon/key.svg' %}" class="me-2" alt=""><a href="{{video.quiz}}">Quiz of Lecture {{ forloop.counter }}</a>
+                {% endif %}
+                    
           </ol>
         {% endfor %}
     </div>
