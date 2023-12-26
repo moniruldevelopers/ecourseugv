@@ -21,9 +21,9 @@
         </div>
       </div>
       <div class="col-md-6">
-        <form class="form-inline">
+        <form class="form-inline" method="GET" action="{% url 'search' %}">
           <div class="input-group align-items-stretch">
-              <input type="text" class="form-control" placeholder="Search Course,Category, Author etc  ">
+              <input type="text" class="form-control" placeholder="Search Course, Category, Author, etc" name="search">
               <div class="input-group-append">
                   <button style="line-height: 2;" class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
               </div>

@@ -15,5 +15,8 @@ path('course/<slug:slug>/enroll/', enroll, name='enroll'),
 path('courses/<slug:course_slug>/playlist/', course_playlist, name='course_playlist'),
 
 
+#for search url
+path('search/', search_courses, name='search'),
+
 
 ]

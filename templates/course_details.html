@@ -156,7 +156,7 @@
                   </a>
                   <div class="video-details">
                     <div class="course-fee">
-                      <h2>Price: {{course.price}} &#2547; </h2>                   
+                      <h2>Price: {{ course.price|default:"Free" }} &#2547; </h2>                   
                     </div>
                     <div class="row gx-2">
                       <div class="col-md-6">

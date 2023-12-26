@@ -6,14 +6,15 @@
           <div class="home-slide-face aos" data-aos="fade-up" style="padding-top: 50px;" >
               
             <div class="container mt-3">
-              <form class="form-inline">
-                  <div class="input-group align-items-stretch">
-                      <input type="text" class="form-control" placeholder="Search Course,Category, Author etc  ">
-                      <div class="input-group-append">
-                          <button style="line-height: 2;" class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
-                      </div>
-                  </div>
-              </form>
+              <form class="form-inline" method="GET" action="{% url 'search' %}">
+                <div class="input-group align-items-stretch">
+                    <input type="text" class="form-control" placeholder="Search Course, Category, Author, etc" name="search">
+                    <div class="input-group-append">
+                        <button style="line-height: 2;" class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+            
           </div>
          
 

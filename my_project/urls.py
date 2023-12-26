@@ -6,12 +6,14 @@ from django.conf.urls.static import static
 from django.views.generic import RedirectView
 from allauth.account.views import LoginView
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('lms.urls')),
     path('accounts/', include('allauth.urls')),
     path('accounts/profile/', RedirectView.as_view(url='/'), name='profile_redirect'),
     path('accounts/login/', LoginView.as_view(), name='account_login'),
+   
  
 
 

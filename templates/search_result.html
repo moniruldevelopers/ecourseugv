@@ -1,0 +1,75 @@
+<!-- search_result.html -->
+
+<!-- search_result.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <section style="margin-top: 150px;">
+        <h2>Total found {{search_results_count}} results for  "{{ search_key }}"</h2>
+    </section>
+
+    <div class="row">
+        {% for course in courses %}
+            <div class="col-lg-4 col-md-6 d-flex">
+                <div class="course-box d-flex aos" data-aos="fade-up">
+                    <div class="product">
+                        <div class="product-img">
+                            {% if course.slug %}
+                                <a href="{% url 'course_details' course.slug %}">
+                            {% else %}
+                                <a href="#">
+                            {% endif %}
+                                <img class="img-fluid" style="width: 380px; height: 255px;" alt="{{course.title}}" src="{{course.banner.url}}" />
+                            </a>
+                            <div class="price">
+                                <h3>{{ course.price|default:"Free" }} &#2547;</h3>
+
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <div class="course-group d-flex">
+                                <div class="course-group-img d-flex">
+                                    {% if course.author.image %}
+                                        <a href="#">
+                                            <img src="{{course.author.image.url}}" alt="{{course.author.name}}" class="img-fluid" />
+                                        </a>
+                                    {% else %}
+                                        <!-- Add a default image or handle the case where there is no image -->
+                                    {% endif %}
+                                    <div class="course-name">
+                                        <h4>
+                                            <a href="#">{{course.author.name}}</a>
+                                        </h4>
+                                        <p>{{course.author.designation}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="title instructor-text">
+                                {% if course.slug %}
+                                    <a href="{% url 'course_details' course.slug %}">{{course.title}}</a>
+                                {% else %}
+                                    {{course.title}}
+                                {% endif %}
+                            </h3>
+                            <div class="course-info d-flex align-items-center">
+                                <div class="rating-img d-flex align-items-center">
+                                    <img src="{% static 'assets/img/icon/icon-01.svg' %}" alt />
+                                    <p>{{course.videos.all.count}} Lessons</p>
+                                </div>
+                                <div class="course-view d-flex align-items-center">
+                                    <img src="{% static 'assets/img/icon/icon-02.svg' %}" alt />
+                                    <p>{{course.duration}} Hours</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+

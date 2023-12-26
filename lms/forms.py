@@ -31,5 +31,3 @@ class EnrollmentForm(forms.ModelForm):
         self.helper.add_input(Submit('submit', 'Submit'))
 
 
-
-

@@ -7,7 +7,7 @@ from django.views.decorators.cache import never_cache
 from django.contrib.auth import logout
 from .forms import *
 from django.views.decorators.cache import never_cache
-
+from django.db.models import Q
 
 
 @login_required(login_url='profile')
@@ -124,3 +124,29 @@ def course_playlist(request, course_slug):
     else:
         # User is not enrolled or not approved, redirect them to another page or show an error message
         return redirect('courses')  # Redirect to the courses page or another appropriate page
+
+
+
+def search_courses(request):
+    search_key = request.GET.get('search', None)
+    courses = Course.objects.filter(
+        Q(title__icontains=search_key) |
+        Q(price__icontains=search_key) |     
+        Q(skill_level__icontains=search_key) |
+        Q(language__icontains=search_key) |
+        Q(category__title__icontains=search_key) |
+        Q(author__name__icontains=search_key)
+    )
+    
+    # Get the count of search results
+    search_results_count = courses.count()
+
+    context = {
+        "courses": courses,
+        "search_key": search_key,
+        "search_results_count": search_results_count,
+    }
+    return render(request, 'search_result.html', context)
+
+
+   
