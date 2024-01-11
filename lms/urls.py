@@ -18,7 +18,7 @@ path('courses/<slug:course_slug>/playlist/', course_playlist, name='course_playl
 #for search url
 path('search/', search_courses, name='search'),
 
-#for preview video 
+
 
 
 ]

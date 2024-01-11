@@ -149,12 +149,3 @@ def search_courses(request):
     return render(request, 'search_result.html', context)
 
 
-def preview_video_view(request, video_id):
-    # Get the specific video for preview
-    video = get_object_or_404(Video, id=video_id)
-
-    context = {
-        'video': video,
-    }
-
-    return render(request, 'preview_video.html', context)
