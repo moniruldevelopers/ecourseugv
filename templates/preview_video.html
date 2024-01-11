@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Preview Video
+{% endblock title %}
+
+
+{% block content %}
+
+{% for video in course.videos.all %}
+    <li>
+        <p>
+            <img src="{% static 'assets/img/icon/play.svg' %}" alt class="me-2" />
+            {{ video.title }}
+        </p>
+        {% if video.is_preview %}
+            <div>
+                <a href="{% url 'preview_video' video.id %}" class="video-preview">Preview</a>
+            </div>
+        {% endif %}
+    </li>
+{% endfor %}
+
+{% endblock content %}
+    

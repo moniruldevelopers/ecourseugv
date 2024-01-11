@@ -20,6 +20,7 @@
 }
 body{
     background: #eee;
+    
 
 }
 .heading{
@@ -137,7 +138,7 @@ body{
 </style>
 
 
-<div class="container">
+<div class="container"  >
     <p style="margin-top: 110px;">Course Playlist <img src="{% static 'assets/img/icon/video.svg' %}" class="me-2" alt=""> {{course.title}}</p>
     
 </div>
@@ -147,6 +148,11 @@ body{
         <div class="video">
             <video oncontextmenu="return false;" id="mainVideo" controls muted autoplay></video>
             <h3 id="mainVideoTitle" class="title"></h3>
+            <div class="controls">
+                <button class="btn btn-primary" id="skipBackward" onclick="skipVideo(-10)">Skip Backward</button>
+                <button class="btn btn-danger" id="fastForward" onclick="changePlaybackRate(2)">Fast Forward</button>
+                <button class="btn btn-primary" id="skipForward" onclick="skipVideo(10)">Skip Forward</button>
+            </div>
         </div>
     </div>
     <div class="video-list">
@@ -168,40 +174,39 @@ body{
 
                 {% if video.quiz %}
                 <img src="{% static 'assets/img/icon/key.svg' %}" class="me-2" alt=""><a href="{{video.quiz}}">Quiz of Lecture {{ forloop.counter }}</a>
-                {% endif %}
-                    
+                {% endif %}                    
           </ol>
         {% endfor %}
     </div>
 </div>
 
 
-
-
 <script>
-
     let listVideo = document.querySelectorAll('.video-list .vid');
     let mainVideo = document.querySelector('.main-video video');
     let title = document.querySelector('.main-video .title ');
 
-    listVideo.forEach(video =>{
-        video.onclick = () =>{
+    listVideo.forEach(video => {
+        video.onclick = () => {
             listVideo.forEach(vid => vid.classList.remove('active'));
             video.classList.add('active');
-            if(video.classList.contains('active')){
+            if (video.classList.contains('active')) {
                 let src = video.children[0].getAttribute('src');
                 mainVideo.src = src;
                 let text = video.children[1].innerHTML;
-                title.innerHTML=text;
-
-            };
+                title.innerHTML = text;
+            }
         };
-
     });
 
-</script>  
+    function skipVideo(seconds) {
+        mainVideo.currentTime += seconds;
+    }
 
-
+    function changePlaybackRate(rate) {
+        mainVideo.playbackRate = rate;
+    }
+</script>
 
 
 
