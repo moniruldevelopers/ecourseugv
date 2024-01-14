@@ -51,7 +51,7 @@
                             />
                           </a>
                           <div class="price">
-                            <h3> {{ course.price }} &#2547;</h3>
+                            <h3>{{ course.price|default:"Free" }} &#2547;</h3>
                           </div>
                         </div>
                         <div class="product-content">

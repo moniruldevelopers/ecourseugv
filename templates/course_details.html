@@ -149,15 +149,36 @@
                     <div class="row gx-2">
                       <div class="col-md-6">
                         <a
-                          href="course-wishlist.html"
+                          href="{% url 'add_to_wishlist' slug=course.slug %}"
                           class="btn btn-wish w-100"
-                          ><i class="feather-heart"></i> Add to Wishlist</a
+                          ><i class="feather-heart"></i> Add to Wishlist <i class="fa fa-bookmark"></i></a
                         >
+
                       </div>
                       <div class="col-md-6">
-                        <a href="javascript:;" class="btn btn-wish w-100"
-                          ><i class="feather-share-2"></i> Share</a
+                        <a id="copyLinkBtn" href="javascript:;" class="btn btn-wish w-100"
+                          ><i class="feather-share-2"></i> Copy Course Link <i class="fa fa-share"></i></a
                         >
+                        <script>
+                          document.getElementById("copyLinkBtn").addEventListener("click", function() {
+                              copyToClipboard(window.location.href);
+                              alert("Link copied to clipboard!");
+                          });
+                      
+                          function copyToClipboard(text) {
+                              var textArea = document.createElement("textarea");
+                              textArea.value = text;
+                              document.body.appendChild(textArea);
+                              textArea.select();
+                              document.execCommand('copy');
+                              document.body.removeChild(textArea);
+                          }
+                      </script> 
+                              <!-- AddToAny BEGIN -->
+                                                    <!-- AddToAny BEGIN -->
+                            <!-- <a class="a2a_dd" href="https://www.addtoany.com/share"><img src="https://static.addtoany.com/buttons/share_save_171_16.png" width="171" height="16" border="0" alt="Share"></a>
+                            <script async src="https://static.addtoany.com/menu/page.js"></script>
+                          -->
                       </div>                      
                     </div>
                     

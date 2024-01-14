@@ -18,7 +18,10 @@ path('courses/<slug:course_slug>/playlist/', course_playlist, name='course_playl
 #for search url
 path('search/', search_courses, name='search'),
 
-
+#wishlist url
+path('add_to_wishlist/<slug:slug>/', add_to_wishlist, name='add_to_wishlist'),
+path('wishlist/', wishlist_view, name='wishlist'),
+path('remove_from_wishlist/<slug:slug>/', remove_from_wishlist, name='remove_from_wishlist'),
 
 
 ]

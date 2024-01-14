@@ -149,3 +149,29 @@ def search_courses(request):
     return render(request, 'search_result.html', context)
 
 
+
+
+#wish list view
+@login_required(login_url='profile')
+def add_to_wishlist(request, slug):
+    course = get_object_or_404(Course, slug=slug)
+    wishlist, created = Wishlist.objects.get_or_create(user=request.user)    
+    wishlist.courses.add(course)
+    messages.success(request, "You saved this Course in your account ")
+    return redirect('wishlist')
+
+@login_required(login_url='profile')
+def wishlist_view(request):
+    wishlist, created = Wishlist.objects.get_or_create(user=request.user)        
+    return render(request, 'wishlist.html', {'wishlist': wishlist})
+
+
+@login_required(login_url='profile')
+def remove_from_wishlist(request, slug):
+    course = get_object_or_404(Course, slug=slug)
+    wishlist = get_object_or_404(Wishlist, user=request.user)
+    wishlist.remove_from_wishlist(course)   
+    messages.error(request, "Deleted Saved Course") 
+    return redirect('wishlist')
+#wish list view 
+

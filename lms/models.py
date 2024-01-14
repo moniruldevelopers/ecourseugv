@@ -131,3 +131,18 @@ class Enrollment(models.Model):
         return self.student_id
 
 
+
+# start wish list code 
+class Wishlist(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    courses = models.ManyToManyField('Course')
+
+    def add_to_wishlist(self, blog):
+        self.courses.add(blog)
+
+    def remove_from_wishlist(self, blog):
+        self.courses.remove(blog)
+
+    def __str__(self):
+        return self.user.username + "'s Wishlist"
+# end wish list code 

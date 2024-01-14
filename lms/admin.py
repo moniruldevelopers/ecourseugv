@@ -16,3 +16,4 @@ class EnrollmentAdmin(admin.ModelAdmin):
     list_display = ["approved","phone_number","transaction_id","course_price", "user","student_id","department", "semester","course"]
 admin.site.register(Enrollment,EnrollmentAdmin)
 
+admin.site.register(Wishlist)
