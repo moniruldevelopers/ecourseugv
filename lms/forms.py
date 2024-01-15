@@ -3,7 +3,7 @@
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-from .models import Enrollment
+from .models import Enrollment, Contact
 
 class EnrollmentForm(forms.ModelForm):
     class Meta:
@@ -31,3 +31,14 @@ class EnrollmentForm(forms.ModelForm):
         self.helper.add_input(Submit('submit', 'Submit'))
 
 
+
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = [
+            "name",
+            "phone",
+            "email",
+            "message"
+        ]

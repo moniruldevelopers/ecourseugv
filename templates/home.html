@@ -21,8 +21,7 @@
           <div class="section-header aos pt-5" data-aos="fade-up">
             <div class="section-sub-head">    
               <h2>Recent Top Courses</h2>
-            </div>
-           
+            </div>           
           </div>
           <div class="section-text aos" data-aos="fade-up">
             <p class="mb-0">
@@ -33,23 +32,17 @@
           </div>
           <div class="course-feature">
             <div class="row">
-
-
-                {% for course in courses %}
-       
+                {% for course in courses %}       
                {% include 'course_card.html' %}
                 {% endfor %}
-                
-
-               
             </div>
             <div class="all-btn all-category d-flex align-items-center ">
                 <a href="{% url 'courses' %}" class="btn btn-primary shadow-lg">All Courses</a>
               </div>
-          
         </div>
       </section>
     
+      {% include 'master_skill_section.html' %}
 
 {% endblock content %}
     

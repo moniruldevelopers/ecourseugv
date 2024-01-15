@@ -29,5 +29,6 @@ path('category_courses/<slug:category_slug>/', category_courses, name='category_
 #for author
 path('author_list/', author_list, name='author_list'),
 path('author_details/<slug:author_slug>/', author_details, name='author_details'),
-
+path('about/', teams, name='about'),
+path('contact/', contact, name='contact'),
 ]

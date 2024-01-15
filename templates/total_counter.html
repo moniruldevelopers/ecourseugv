@@ -7,6 +7,7 @@
           <div class="col-lg-4 col-md-6 d-flex">
             <div class="course-full-width ">
               <div class="blur-border course-radius aos shadow-sm" data-aos="fade-up">
+               <a href="{% url 'author_list' %}">
                 <div class="online-course d-flex align-items-center">
                   <div class="course-img">
                     <img src="{% static 'assets/img/cources-icon.svg' %}" alt />
@@ -16,12 +17,14 @@
                     <p>Expert Tutors</p>
                   </div>
                 </div>
+               </a>
               </div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6 d-flex">
             <div class="course-full-width">
               <div class="blur-border course-radius aos shadow-sm" data-aos="fade-up">
+               <a href="{% url 'courses' %}">
                 <div class="online-course d-flex align-items-center">
                   <div class="course-img">
                     <img src="{% static 'assets/img/certificate-icon.svg' %}" alt />
@@ -31,6 +34,7 @@
                     <p>Ceritified Courses</p>
                   </div>
                 </div>
+               </a>
               </div>
             </div>
           </div>

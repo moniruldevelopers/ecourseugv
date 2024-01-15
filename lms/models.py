@@ -148,3 +148,31 @@ class Wishlist(models.Model):
     def __str__(self):
         return self.user.username + "'s Wishlist"
 # end wish list code 
+
+class Team(models.Model):
+    name=models.CharField(max_length=50)
+    image = models.ImageField(upload_to='Teams_members/')
+    designation=models.CharField(max_length=50)
+    phone_regex = RegexValidator(
+        regex=r'^\+?1?\d{9,15}$',  # Example regex for international phone numbers
+        message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed."
+    )
+    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True, null=True)
+    email = models.EmailField(max_length=50, null=True,blank=True)
+    fb = models.URLField(null=True,blank=True)
+    
+    def __str__(self):
+        return self.name
+
+class Contact(models.Model):
+    phone_regex = RegexValidator(
+        regex=r'^\+?1?\d{9,15}$', 
+        message="Phone number must be entered in the format: '+088'. Up to 15 digits allowed."
+    )
+    name = models.CharField(max_length = 100)
+    phone = models.CharField(validators=[phone_regex], max_length=15)
+    email = models.EmailField(max_length = 50)    
+    message = models.TextField(max_length=500)
+    def __str__(self):
+        return self.name
+    

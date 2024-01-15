@@ -8,6 +8,7 @@ from django.contrib.auth import logout
 from .forms import *
 from django.views.decorators.cache import never_cache
 from django.db.models import Q
+from django.db.models import Count
 
 
 @login_required(login_url='profile')
@@ -195,7 +196,7 @@ def category_courses(request, category_slug):
 
 
 def author_list(request):
-    authors = Author.objects.all()
+    authors = Author.objects.annotate(total_courses=Count('course_author'))
     author_count = authors.count()
 
     context = {
@@ -216,3 +217,27 @@ def author_details(request, author_slug):
     }
 
     return render(request, 'author_details.html', context)
+
+
+def teams(request):
+    teams = Team.objects.all()
+    context = {
+        "teams":teams
+    }
+    return render(request, 'about.html', context)
+
+def contact(request):
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Contact Form submitted successfully")
+            return redirect('contact')
+        else:
+            messages.error(request, "Something wrong to send message")
+    else:
+        form = ContactForm()
+    context = {
+        "form": form,
+    }  
+    return render(request, 'contact.html', context)
