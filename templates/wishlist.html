@@ -13,7 +13,7 @@
   <div class="row">
     {% for course in wishlist.courses.all %}
     <div class="col-lg-4 col-md-6 d-flex" >
-        <div  class="course-box d-flex aos" data-aos="fade-up" style="border: 1px solid lightgray;">
+        <div  class="course-box d-flex aos shadow-lg" data-aos="fade-up" >
           <div class="product" >
             <div class="product-img">
               <a href="{% url 'course_details' course.slug %}">
