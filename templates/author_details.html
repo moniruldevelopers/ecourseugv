@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Home Page
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="container">
+    
+<div  style="display: flex; align-items: center; justify-content: center;margin-top: 150px; ">
+
+    <!-- Left side (Image) -->
+    <div style="flex-shrink: 0; margin-right: 20px;">
+        <img style="width: 150px; height: 150px; border-radius: 10%; " src="{{ author.image.url }}" alt="{{ author.name }} Image">
+    </div>
+
+    <!-- Right side (Name and Designation) -->
+    <div>
+        <h1 style="font-size: 24px; margin-bottom: 10px;">{{ author.name }}</h1>
+        <p style="font-size: 18px; color: #777;">{{ author.designation }}</p>
+    </div>
+
+</div>
+<hr>
+{% if courses %}
+    <h2>Courses by {{ author.name }}</h2>
+    <div class="row">
+        {% for course in courses %}                  
+        {% include 'course_card.html' %}
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No courses available by {{ author.name }}</p>
+{% endif %}
+
+</div>
+{% endblock content %}
+   

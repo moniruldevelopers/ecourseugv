@@ -82,6 +82,11 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                  # `allauth` needs this from django
                 'django.template.context_processors.request',
+                # my project context processors
+                'lms.context_processors.get_all_categories',
+               
+          
+
                 
             ],
         },

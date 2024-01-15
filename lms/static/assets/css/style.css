@@ -21667,7 +21667,7 @@ input[type=password]::-ms-clear
 	}
 	.logo img,
 	.menu-logo img {
-		width: 120px;
+		width: 100%;
 	}
 	h5 {
 		font-size: 16px;

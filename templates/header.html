@@ -12,15 +12,15 @@
               </span>
             </a>
             <a href="{% url 'home' %}" class="navbar-brand logo">
-              <img src="{% static 'assets/ecourse-01.svg' %}" class="img-fluid" alt="Logo" />
+              <img  src="{% static 'assets/img/myimg/logo.png' %}" class="myimg" alt="Logo" />
             </a>
           </div>
           <div class="main-menu-wrapper">
             <div class="menu-header">
               <a href="{% url 'home' %}" class="menu-logo">
-                <img
-                  src="{% static 'assets/ecourse-01.svg' %}"
-                  class="img-fluid"
+                <img style="width: 180px;"
+                  src="{% static 'assets/img/myimg/logo.png' %}"
+                  class="myimg"
                   alt="Logo"
                 />
               </a>
@@ -36,22 +36,38 @@
               <li class="has-submenu menu-effect active">                
                 <li><a href="{% url 'home' %}">Home <i class="fa-solid fa-house"></i></a></li>
               </li>
+              <li class="has-submenu menu-effect active">                
+                <li><a href="{% url 'author_list' %}">Teacher's <i class="fas fa-chalkboard-teacher"></i></a></li>
+              </li>
+             
+
               <li class="has-submenu menu-effect active">              
                 <li><a href="{% url 'courses' %}">Courses <i class="fa-solid fa-book-open-reader"></i></a></li>
               </li>
 
-              <li class="has-submenu menu-effect">
-                <a href="javascript:void(0)">Category <i class="fa-solid fa-list"></i></a>
-                <ul class="submenu">
 
-                  <li><a href="#">category item</a></li>                 
-               
+              <li class="has-submenu menu-effect" >
+                <a href="javascript:void(0)">Category <i class="fa-solid fa-list"></i></a>
+                <ul class="submenu" aria-labelledby="navbarDropdown" style="max-height: 300px; overflow-y: auto;">
+                    <!-- {% for category in categories %}
+                        <li><a href="{% url 'category_courses' category.slug %}">{{ category.title }}  ({{ category_count.course_count }} courses)</a></li>
+                    {% endfor %} -->                    
+                      {% for category_count in category_counts %}
+                          <li><a href="{% url 'category_courses' category_count.category.slug %}">{{ category_count.category.title }} ({{ category_count.course_count }} courses)</a></li>
+                      {% endfor %}
+
+                  
                 </ul>
-              </li> 
-              
+              </li>
+
+
+
               <li class="has-submenu menu-effect">
                 <a href="javascript:void(0)">Info <i class="fa-solid fa-circle-info"></i></a>
                 <ul class="submenu">
+                 
+                    <!-- Add other navigation links as needed -->
+         
                   <li><a href="#">About Us</a></li>                 
                   <li><a href="#">Contact Us</a></li> 
                 </ul>
@@ -61,22 +77,25 @@
                  
               {% if request.user.is_authenticated %}  
               <li class="has-submenu menu-effect">
-                <a href="javascript:void(0)">{{request.user.username}}<i class="fas fa-chevron-down"></i></a>
+                <a href="javascript:void(0)"> {{request.user.username}}<i class="fas fa-chevron-down"></i></a>
                 <ul class="submenu">
-                  <li><a href="{% url 'dashboard' %}">Enrolled Courses</a></li>                 
-                  <li><a href="{% url 'wishlist' %}">Wishlist Courses</a></li>                 
-                  <li><a href="{% url 'custom_logout' %}">Saved Courses</a></li>                 
-                  <li><a href="{% url 'custom_logout' %}">Logout</a></li> 
+                  <li><a href="{% url 'dashboard' %}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Enrolled Courses</a></li>                 
+                  <li><a href="{% url 'wishlist' %}"><i class="fa fa-bookmark"></i> Wishlist Courses</a></li>
+                  <li><a href="{% url 'custom_logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li> 
                           
                 </ul>
               </li> 
-              {% else %}           
-              <li class="has-submenu menu-effect active">              
-                <li><a href="{% url 'profile' %}">Sign In <i class="fa-solid fa-right-to-bracket"></i></a></li>
+              {% else %}  
+              <li class="has-submenu menu-effect">
+                <a href="javascript:void(0)">Account <i class="fa-solid fa-user-lock"></i></a>
+                <ul class="submenu">
+                 
+                    <!-- Add other navigation links as needed -->
+         
+                  <li><a href="{% url 'profile' %}">Login <i class="fa-solid fa-right-to-bracket"></i></a></li>                 
+                  <li><a href="{% url 'account_signup' %}">Create Account <i class="fa-solid fa-user-plus"></i></a></li> 
+                </ul>
               </li> 
-              <li class="has-submenu menu-effect active">              
-                <li><a href="{% url 'account_signup' %}">Create Account <i class="fa-solid fa-user-plus"></i></a></li>
-              </li>    
               {% endif %}            
             </ul>
           </div>       

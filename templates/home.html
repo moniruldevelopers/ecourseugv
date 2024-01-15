@@ -37,65 +37,7 @@
 
                 {% for course in courses %}
        
-                <div class="col-lg-4 col-md-6 d-flex">
-                    <div class="course-box d-flex aos" data-aos="fade-up">
-                      <div class="product">
-                        <div class="product-img">
-                          <a href="{% url 'course_details' course.slug %}">
-                            <img
-
-                              class="img-fluid"
-                              style="width: 380px; height: 255px;"
-                              alt="{{course.title}}"
-                              src="{{course.banner.url}}"
-                            />
-                          </a>
-                          <div class="price">
-                            <h3>{{ course.price|default:"Free" }} &#2547;</h3>
-                          </div>
-                        </div>
-                        <div class="product-content">
-                          <div class="course-group d-flex">
-                            <div class="course-group-img d-flex">
-                              <a href="instructor-profile.html"
-                                ><img
-                                  src="{{course.author.image.url}}"
-                                  alt="{{course.author.name}}"
-                                  class="img-fluid"
-                              /></a>
-                              <div class="course-name">
-                                <h4>
-                                  <a href="instructor-profile.html">{{course.author.name}}</a>
-                                </h4>
-                                <p>{{course.author.designation}}</p>
-                              </div>
-                            </div>          
-                          </div>
-                          <h3 class="title instructor-text">
-                            <a href="{% url 'course_details' course.slug %}"
-                              >{{course.title}}</a
-                            >
-                          </h3>
-                          <div class="course-info d-flex align-items-center">
-                            <div class="rating-img d-flex align-items-center">
-                              <img
-                                src="{% static 'assets/img/icon/icon-01.svg' %}"
-                                alt
-                              />
-                              <p>{{course.videos.all.count }} Lessons</p>
-                            </div>
-                            <div class="course-view d-flex align-items-center">
-                              <img
-                                src="{% static 'assets/img/icon/icon-02.svg' %}"
-                                alt
-                              />
-                              <p>{{course.duration}} Hours</p>
-                            </div>
-                          </div> 
-                        </div>
-                      </div>
-                    </div>
-                </div> 
+               {% include 'course_card.html' %}
                 {% endfor %}
                 
 

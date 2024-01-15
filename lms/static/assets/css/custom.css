@@ -29,3 +29,8 @@
   #myBtn:hover {
     background-color: #555;
   }
+
+.myimg {
+    max-width: 250px !important;
+   
+}

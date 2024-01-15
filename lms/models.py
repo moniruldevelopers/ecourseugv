@@ -10,16 +10,7 @@ from django.core.validators import RegexValidator
 from django.contrib.auth.models import AbstractUser
 
 
-class Author(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-    image = models.ImageField(upload_to='author_images/')
-    designation = models.CharField(max_length=150)
-    slug = models.SlugField(null=True, blank=True)
-    def __str__(self):
-        return self.name
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
+
 
 
 class Category(models.Model):
@@ -32,7 +23,18 @@ class Category(models.Model):
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
+class Author(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    image = models.ImageField(upload_to='author_images/')
+    designation = models.CharField(max_length=150)
+    slug = models.SlugField(null=True, blank=True)
+    def __str__(self):
+        return self.name
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
+        
 class Course(models.Model):
     ADVANCED = 'Advanced'
     INTERMEDIATE = 'Intermediate'

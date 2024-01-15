@@ -23,5 +23,11 @@ path('add_to_wishlist/<slug:slug>/', add_to_wishlist, name='add_to_wishlist'),
 path('wishlist/', wishlist_view, name='wishlist'),
 path('remove_from_wishlist/<slug:slug>/', remove_from_wishlist, name='remove_from_wishlist'),
 
+#for category
+path('category_courses/<slug:category_slug>/', category_courses, name='category_courses'),
+
+#for author
+path('author_list/', author_list, name='author_list'),
+path('author_details/<slug:author_slug>/', author_details, name='author_details'),
 
 ]

@@ -34,8 +34,10 @@
   
     <div class="course-feature">
       <div class="row">
+        {% for course in courses %}
+     
         {% include 'course_card.html' %}   
-          
+          {% endfor %}
     </div>
     {% include 'pagination.html' %}  
   </div>

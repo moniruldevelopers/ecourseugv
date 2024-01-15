@@ -28,7 +28,7 @@
 </style>
 <div class="container enroll" style="margin-top: 120px;">
     <h2>Enroll Course is <i class="fa-solid fa-arrow-right"></i> {{ course.title }}</h2>
-    <p >Course Price: {{ course.price|default:"Free" }} &#2547;  <span style="background-color: red; color:white">Payon Bkash/Nagod:</span> <i class="fa-solid fa-mobile"></i>  01575082901</p>
+    <p >Course Price: {{ course.price|default:"Free" }} &#2547;  <span style="background-color: red; color:white">Payment on  Bkash/Nagod:</span> <i class="fa-solid fa-mobile"></i>  01575082901</p>
 
     <form method="POST" action="{% url 'enroll' slug=course.slug %}">
         {% csrf_token %}

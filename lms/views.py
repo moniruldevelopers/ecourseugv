@@ -52,7 +52,7 @@ def home(request):
 def courses(request):
     queryset = Course.objects.order_by('-created_date')
     page = request.GET.get('page',1)
-    paginator = Paginator(queryset,6)
+    paginator = Paginator(queryset,1)
     try:
         courses = paginator.page(page)
     except EmptyPage:
@@ -175,3 +175,44 @@ def remove_from_wishlist(request, slug):
     return redirect('wishlist')
 #wish list view 
 
+
+
+def category_courses(request, category_slug):
+    # Retrieve the category based on the provided slug
+    category = get_object_or_404(Category, slug=category_slug)
+
+    # Retrieve all courses associated with the category
+    courses = Course.objects.filter(category=category)
+
+    context = {
+        "category": category,
+        "courses": courses,
+    }
+
+    return render(request, 'category_courses.html', context)
+
+
+
+
+def author_list(request):
+    authors = Author.objects.all()
+    author_count = authors.count()
+
+    context = {
+        'authors': authors,
+        'author_count': author_count,
+    }
+
+    return render(request, 'author_list.html', context)
+
+
+def author_details(request, author_slug):
+    author = get_object_or_404(Author, slug=author_slug)
+    courses = author.course_author.all()
+
+    context = {
+        'author': author,
+        'courses': courses,
+    }
+
+    return render(request, 'author_details.html', context)
