@@ -9,6 +9,12 @@ from django.core.validators import RegexValidator
 #for ss
 from django.contrib.auth.models import AbstractUser
 
+#for delete video
+from django.utils.deconstruct import deconstructible
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
+from django.db.models.signals import pre_delete,pre_save
+from django.dispatch import receiver
 
 
 
@@ -71,29 +77,43 @@ class Course(models.Model):
     language = models.CharField(max_length=20, choices=LANGUAGE_CHOOSE, default=BANGLA)
     course_details = RichTextField()
     banner = models.ImageField(upload_to='courses_banner/')
-    course_files = models.FileField(upload_to='course_files/',null=True, blank=True)
     price = models.PositiveIntegerField(default=0)
     created_date = models.DateTimeField(auto_now_add=True)
    
     def __str__(self):
         return self.title
-
-    def save(self, *args, **kwargs):
+# for video calculation
+    def save(self, *args, **kwargs):  
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
+@deconstructible
+class UploadToPath:
+    def __init__(self, path):
+        self.path = path
+
+    def __call__(self, instance, filename):
+        old_instance = instance.__class__.objects.filter(pk=instance.pk).first()
+        if old_instance:
+            old_instance.video_file.delete(save=False)
+        return f"{self.path}/{filename}"
 
 class Video(models.Model):
     course = models.ForeignKey(Course, related_name='videos', on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
-    is_preview = models.BooleanField(default=False)
-    video_file = models.FileField(upload_to='course_videos/')
+    is_preview = models.BooleanField(default=False)    
+    video_file = models.FileField(upload_to=UploadToPath('course_videos/'))
     class_file = models.FileField(upload_to='course_files/', null=True, blank=True )
     assignment = models.FileField(upload_to='course_files/', null=True, blank=True )
     quiz = models.URLField(max_length=500, null=True, blank=True)
     def __str__(self):
         return self.title
 
+
+@receiver(pre_delete, sender=Video)
+def delete_media_files(sender, instance, **kwargs):
+    if instance.video_file:
+        instance.video_file.delete(save=False)
 
 # for enroll ment 
 

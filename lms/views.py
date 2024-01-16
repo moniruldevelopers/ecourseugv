@@ -54,7 +54,7 @@ def home(request):
 def courses(request):
     queryset = Course.objects.order_by('-created_date')
     page = request.GET.get('page',1)
-    paginator = Paginator(queryset,1)
+    paginator = Paginator(queryset,6)
     try:
         courses = paginator.page(page)
     except EmptyPage:
