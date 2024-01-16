@@ -148,7 +148,7 @@
                       </div>
                       <div class="col-md-6">
                         <a id="copyLinkBtn" href="javascript:;" class="btn btn-wish w-100"
-                          ><i class="feather-share-2"></i> Copy Course Link <i class="fa fa-share"></i></a
+                          ><i class="feather-share-2"></i> Copy Link <i class="fa fa-share"></i></a
                         >
                         <script>
                           document.getElementById("copyLinkBtn").addEventListener("click", function() {
@@ -165,17 +165,11 @@
                               document.body.removeChild(textArea);
                           }
                       </script> 
-                              <!-- AddToAny BEGIN -->
-                                                    <!-- AddToAny BEGIN -->
-                            <!-- <a class="a2a_dd" href="https://www.addtoany.com/share"><img src="https://static.addtoany.com/buttons/share_save_171_16.png" width="171" height="16" border="0" alt="Share"></a>
-                            <script async src="https://static.addtoany.com/menu/page.js"></script>
-                          -->
+                             
+                                                    
+                           
                       </div>                      
-                    </div>
-                    
-
-
-
+                    </div> 
                     {% if user.is_authenticated %}
                     {% if enrollments.exists %}
                       {% for enrollment in enrollments %}
@@ -226,6 +220,16 @@
                 </ul>
               </div>
             </div>
+
+            <div class="card feature-sec">
+              <div class="card-body">
+                <!-- codewill be here  -->
+                
+
+              </div>
+            </div>
+
+
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 from django.shortcuts import render,HttpResponse,redirect, get_object_or_404, redirect
 from django.contrib import messages
+from django.http import JsonResponse
 from .models import *
 from django.core.paginator import  PageNotAnInteger, EmptyPage, Paginator# Create your views here.
 from django.contrib.auth.decorators import login_required
@@ -210,10 +211,10 @@ def author_list(request):
 def author_details(request, author_slug):
     author = get_object_or_404(Author, slug=author_slug)
     courses = author.course_author.all()
-
     context = {
         'author': author,
         'courses': courses,
+        
     }
 
     return render(request, 'author_details.html', context)
@@ -241,3 +242,4 @@ def contact(request):
         "form": form,
     }  
     return render(request, 'contact.html', context)
+

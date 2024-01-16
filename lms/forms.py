@@ -8,7 +8,7 @@ from .models import Enrollment, Contact
 class EnrollmentForm(forms.ModelForm):
     class Meta:
         model = Enrollment
-        fields = ['student_id', 'transaction_id', 'phone_number', 'name', 'department', 'semester']
+        fields = ['student_id','batch_no', 'transaction_id', 'phone_number', 'name', 'department', 'semester']
 
     course_price = forms.DecimalField(widget=forms.HiddenInput())
     

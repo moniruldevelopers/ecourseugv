@@ -20,7 +20,7 @@ admin.site.register(Category)
 
 
 class EnrollmentAdmin(admin.ModelAdmin):
-    list_display = ["approved", "phone_number", "transaction_id", "course_price", "user", "student_id", "department", "semester", "course"]
+    list_display = ["approved", "phone_number", "transaction_id","batch_no", "course_price", "user", "student_id", "department", "semester", "course"]
 
     actions = ['export_selected_csv', 'export_selected_pdf']
 
@@ -34,7 +34,7 @@ class EnrollmentAdmin(admin.ModelAdmin):
 
     export_selected_pdf.short_description = "Export selected enrollments as PDF"
 
-    list_filter = ["approved", "department", "semester", "course"]
+    list_filter = ["batch_no","approved", "department", "semester", "course"]
 
     # Common export function
     def export_selected(modeladmin, request, queryset, file_format='csv'):
