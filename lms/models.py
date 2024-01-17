@@ -32,9 +32,21 @@ class Category(models.Model):
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
+
+
+@deconstructible
+class UploadToPath:
+    def __init__(self, path):
+        self.path = path
+
+    def __call__(self, instance, filename):
+        old_instance = instance.__class__.objects.filter(pk=instance.pk).first()
+        if old_instance:
+            old_instance.image.delete(save=False)
+        return f"{self.path}/{filename}"
 class Author(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    image = models.ImageField(upload_to='author_images/')
+    image = models.ImageField(upload_to=UploadToPath('author_images/'))
     designation = models.CharField(max_length=150)
     phone_regex = RegexValidator(
         regex=r'^\+?1?\d{9,15}$',  # Example regex for international phone numbers
@@ -48,6 +60,13 @@ class Author(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
+
+@receiver(pre_delete, sender=Author)
+def delete_media_files(sender, instance, **kwargs):
+    if instance.image:
+        instance.image.delete(save=False)
+
+
 @deconstructible
 class UploadToPath:
     def __init__(self, path):
