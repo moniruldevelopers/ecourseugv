@@ -33,20 +33,23 @@ body{
 .container{
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 15px;
-    align-items: flex-start;
-    padding: 5px 5%;
+    
+    gap: 5px;
+    
+    /* align-items: flex-start;
+    padding: 5px 5%; */
 
 }
 .container .main-video{
     background:#fff;
     border-radius: 5px;
     padding: 10px;
+    
 }
 
 .container .main-video video{
     width: 100%;
-    border-radius: 5px;
+    border-radius: 5px;  
 
 }
 
@@ -144,6 +147,7 @@ body{
         
 }
 
+
 </style>
 <div class="container"  >
     <p style="margin-top: 110px;">Course Playlist <img src="{% static 'assets/img/icon/video.svg' %}" class="me-2" alt=""> {{course.title}}</p>
@@ -153,10 +157,18 @@ body{
 
     
 <div class="container" style="margin-bottom: 50px;">
-    <div class="main-video">
+    <div class="main-video shadow-lg ">
         <div class="video">
             <video oncontextmenu="return false;" id="mainVideo" controls  autoplay></video>
-            <h3 id="mainVideoTitle" class="title"></h3>
+                           
+            <h3 id="mainVideoTitle" class="title">
+                {% if video_clicked %}
+                    {{ video_title }}
+                {% else %}
+                    Click Listed Video For Play
+                {% endif %}
+            </h3>
+                
             <div class="controls">
                 <button class="btn btn-success" id="skipBackward" onclick="skipVideo(-10)"><i class="fa-solid fa-backward"></i></button>
                 <button class="btn btn-danger" id="togglePlayPause">
@@ -172,11 +184,13 @@ body{
             </div>
         </div>
     </div>
-    <div class="video-list">
+    <div class="video-list shadow-lg">
         {% for video in course.videos.all %}
             <div class="vid{% if forloop.first %} active{% endif %}">
                 <video oncontextmenu="return false;" class="playlist-video" src="{{ video.video_file.url }}" muted></video>
+                               
                 <h3 class="title">{{ forloop.counter }}. {{ video.title }}</h3>
+                
               </div>
           <ol>
             <li style="list-style-type: none;">               
