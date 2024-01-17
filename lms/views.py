@@ -16,7 +16,7 @@ from django.db.models import Count
 def custom_logout(request):
     logout(request)
     messages.success(request, "You are logged out!")
-    return redirect('home')
+    return redirect('profile')
 
 @never_cache
 @login_required

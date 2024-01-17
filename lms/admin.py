@@ -3,8 +3,6 @@ from .models import *
 import csv
 from django.http import HttpResponse
 
-
-
 from django.utils.translation import gettext as _
 from reportlab.pdfgen import canvas
 # Register your models here.
@@ -13,8 +11,11 @@ class VideoInline(admin.TabularInline):
 
 class CourseAdmin(admin.ModelAdmin):
     inlines = [VideoInline]
+    list_filter = ['author','category']  # Add 'author' to enable filtering by author
+    search_fields = ['title', 'author__name']  # Add fields to enable search by title and author's name
 
 admin.site.register(Course, CourseAdmin)
+
 admin.site.register(Author)
 admin.site.register(Category)
 
