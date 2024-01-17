@@ -10,6 +10,9 @@
 
 
 <div class="inner-banner" style="margin-top: 150px ;">
+  {% if messages %}
+      {% include 'message.html' %}
+      {% endif %}
     <div class="container">
       <div class="row">
         <div class="col-lg-8">

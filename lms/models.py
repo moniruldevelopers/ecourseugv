@@ -48,7 +48,16 @@ class Author(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
+@deconstructible
+class UploadToPath:
+    def __init__(self, path):
+        self.path = path
 
+    def __call__(self, instance, filename):
+        old_instance = instance.__class__.objects.filter(pk=instance.pk).first()
+        if old_instance:
+            old_instance.banner.delete(save=False)
+        return f"{self.path}/{filename}"
         
 class Course(models.Model):
     ADVANCED = 'Advanced'
@@ -76,16 +85,20 @@ class Course(models.Model):
     skill_level = models.CharField(max_length=50, choices=SKILL_CHOICES, default=BASIC)
     language = models.CharField(max_length=20, choices=LANGUAGE_CHOOSE, default=BANGLA)
     course_details = RichTextField()
-    banner = models.ImageField(upload_to='courses_banner/')
+    banner = models.ImageField(upload_to=UploadToPath('courses_banner/'))
     price = models.PositiveIntegerField(default=0)
     created_date = models.DateTimeField(auto_now_add=True)
    
     def __str__(self):
         return self.title
-# for video calculation
+
     def save(self, *args, **kwargs):  
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+@receiver(pre_delete, sender=Course)
+def delete_media_files(sender, instance, **kwargs):
+    if instance.banner:
+        instance.banner.delete(save=False)
 
 @deconstructible
 class UploadToPath:

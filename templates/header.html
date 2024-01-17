@@ -13,14 +13,14 @@
               </span>
             </a>
             <a href="{% url 'home' %}" class="navbar-brand logo ">
-              <img  src="{% static 'assets/img/myimg/logo.png' %}" class="myimg" alt="Logo" />
+              <img  src="{% static 'assets/img/myimg/ugvlogo.png' %}" class="myimg" alt="Logo" />
             </a>
           </div>
           <div class="main-menu-wrapper">
             <div class="menu-header">
               <a href="{% url 'home' %}" class="menu-logo">
-                <img style="width: 180px;"
-                  src="{% static 'assets/img/myimg/logo.png' %}"
+                <img style="width: 190px;"
+                  src="{% static 'assets/img/myimg/ugvlogo.png' %}"
                   class="myimg"
                   alt="Logo"
                 />
@@ -34,18 +34,21 @@
               </a>
             </div>
             <ul class="main-nav">             
-              <li class="has-submenu menu-effect">                
+              <li>
                 <a href="{% url 'home' %}">Home <i class="fa-solid fa-house" style="font-size: 16px;"></i></a>
+
               </li>
               <li><a href="{% url 'author_list' %}">Blog's <i class="fa-solid fa-blog" style="font-size: 16px;"></i></a></li>
-
-              <li class="has-submenu menu-effect ">                
+              <li>
                 <a href="{% url 'author_list' %}">Teacher's <i class="fas fa-chalkboard-teacher" style="font-size: 16px;"></i></a>
+
               </li>
+              <!-- <li class="has-submenu menu-effect ">                
+              </li> -->
               <!-- <li class="has-submenu menu-effect active">                
               </li> -->            
 
-              <li class="has-submenu menu-effect ">              
+              <li >              
                 <a href="{% url 'courses' %}">Courses <i class="fa-solid fa-book-open-reader" style="font-size: 16px;"></i></a>
               </li>
               <li class="has-submenu menu-effect" >
