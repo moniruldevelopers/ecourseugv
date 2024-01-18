@@ -5,7 +5,7 @@ from django.utils import timezone
 #for enroll
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
-
+import os
 #for ss
 from django.contrib.auth.models import AbstractUser
 
@@ -16,7 +16,8 @@ from django.dispatch import receiver
 from django.db.models.signals import pre_delete,pre_save
 from django.dispatch import receiver
 
-
+# validity
+from django.core.validators import FileExtensionValidator 
 
 
 class Category(models.Model):
@@ -24,7 +25,6 @@ class Category(models.Model):
     slug = models.SlugField(null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
 
-   
     def __str__(self):
         return self.title
 
@@ -33,26 +33,16 @@ class Category(models.Model):
         super().save(*args, **kwargs)
 
 
-
-@deconstructible
-class UploadToPath:
-    def __init__(self, path):
-        self.path = path
-
-    def __call__(self, instance, filename):
-        old_instance = instance.__class__.objects.filter(pk=instance.pk).first()
-        if old_instance:
-            old_instance.image.delete(save=False)
-        return f"{self.path}/{filename}"
+ 
 class Author(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    image = models.ImageField(upload_to=UploadToPath('author_images/'))
+    image = models.ImageField(upload_to='author_images/')
     designation = models.CharField(max_length=150)
     phone_regex = RegexValidator(
         regex=r'^\+?1?\d{9,15}$',  # Example regex for international phone numbers
-        message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed."
+        message="Phone number must be entered in the format: '+880 1XXX NNNNNN'. Up to 15 digits allowed."
     )
-    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True, null=True)
+    phone_number = models.CharField(validators=[phone_regex], max_length=16, blank=True, null=True)
     email =models.EmailField(max_length=50)
     slug = models.SlugField(null=True, blank=True)
     def __str__(self):
@@ -61,23 +51,10 @@ class Author(models.Model):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
-@receiver(pre_delete, sender=Author)
-def delete_media_files(sender, instance, **kwargs):
-    if instance.image:
-        instance.image.delete(save=False)
 
 
-@deconstructible
-class UploadToPath:
-    def __init__(self, path):
-        self.path = path
 
-    def __call__(self, instance, filename):
-        old_instance = instance.__class__.objects.filter(pk=instance.pk).first()
-        if old_instance:
-            old_instance.banner.delete(save=False)
-        return f"{self.path}/{filename}"
-        
+
 class Course(models.Model):
     ADVANCED = 'Advanced'
     INTERMEDIATE = 'Intermediate'
@@ -104,7 +81,7 @@ class Course(models.Model):
     skill_level = models.CharField(max_length=50, choices=SKILL_CHOICES, default=BASIC)
     language = models.CharField(max_length=20, choices=LANGUAGE_CHOOSE, default=BANGLA)
     course_details = RichTextField()
-    banner = models.ImageField(upload_to=UploadToPath('courses_banner/'))
+    banner = models.ImageField(upload_to='courses_banner/')
     price = models.PositiveIntegerField(default=0)
     created_date = models.DateTimeField(auto_now_add=True)
    
@@ -114,42 +91,34 @@ class Course(models.Model):
     def save(self, *args, **kwargs):  
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
-@receiver(pre_delete, sender=Course)
-def delete_media_files(sender, instance, **kwargs):
-    if instance.banner:
-        instance.banner.delete(save=False)
 
-@deconstructible
-class UploadToPath:
-    def __init__(self, path):
-        self.path = path
 
-    def __call__(self, instance, filename):
-        old_instance = instance.__class__.objects.filter(pk=instance.pk).first()
-        if old_instance:
-            old_instance.video_file.delete(save=False)
-        return f"{self.path}/{filename}"
 
 class Video(models.Model):
     course = models.ForeignKey(Course, related_name='videos', on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
     is_preview = models.BooleanField(default=False)    
-    video_file = models.FileField(upload_to=UploadToPath('course_videos/'))
-    class_file = models.FileField(upload_to='course_files/', null=True, blank=True )
-    assignment = models.FileField(upload_to='course_files/', null=True, blank=True )
+    video_file = models.FileField(
+        upload_to='course_videos/',
+        validators=[FileExtensionValidator(allowed_extensions=['mp4'])]
+    )
+    class_file = models.FileField(
+        upload_to='course_files/',
+        null=True,
+        blank=True,
+        validators=[FileExtensionValidator(allowed_extensions=['pdf', 'docx','pptx'])]
+    )
+    assignment = models.FileField(
+        upload_to='assignment_files/',
+        null=True,
+        blank=True,
+        validators=[FileExtensionValidator(allowed_extensions=['pdf', 'docx','jpg'])]
+    )
     quiz = models.URLField(max_length=500, null=True, blank=True)
     def __str__(self):
         return self.title
 
-
-@receiver(pre_delete, sender=Video)
-def delete_media_files(sender, instance, **kwargs):
-    if instance.video_file:
-        instance.video_file.delete(save=False)
-
 # for enroll ment 
-
-  # models.py
 
 class Enrollment(models.Model):
     SEMESTER_CHOICES = [
@@ -178,9 +147,9 @@ class Enrollment(models.Model):
     transaction_id = models.CharField(max_length=50, unique=True)
     phone_regex = RegexValidator(
         regex=r'^\+?1?\d{9,15}$',  # Example regex for international phone numbers
-        message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed."
+        message="Phone number must be entered in the format: '+880 1XXX NNNNNN'. Up to 15 digits allowed."
     )
-    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True, null=True)
+    phone_number = models.CharField(validators=[phone_regex], max_length=15, blank=True, null=True)
 
     name = models.CharField(max_length=100)
     department = models.CharField(max_length=50, choices=DEPARTMENT_CHOICES)
@@ -217,9 +186,9 @@ class Team(models.Model):
     designation=models.CharField(max_length=50)
     phone_regex = RegexValidator(
         regex=r'^\+?1?\d{9,15}$',  # Example regex for international phone numbers
-        message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed."
+        message="Phone number must be entered in the format: '+880 1XXX NNNNNN'. Up to 15 digits allowed."
     )
-    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True, null=True)
+    phone_number = models.CharField(validators=[phone_regex], max_length=15, blank=True, null=True)
     email = models.EmailField(max_length=50, null=True,blank=True)
     fb = models.URLField(null=True,blank=True)
     
