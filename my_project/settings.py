@@ -16,9 +16,9 @@ SECRET_KEY = 'django-insecure-7i-8$r1l2$0&_wpacw#c$6ca!0s0mwjcs9a7oxr5t59w$+yp5+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "192.168.98.31","127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "192.168.151.31","127.0.0.1"]
 
-#python manage.py runserver 192.168.98.31:8000
+#python manage.py runserver 192.168.151.31:8000
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5', 
     'django_cleanup.apps.CleanupConfig', # should go after your apps
-      
+    'import_export',
 ]
 
 LOGIN_REDIRECT_URL = '/'
