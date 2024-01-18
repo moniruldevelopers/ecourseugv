@@ -22,7 +22,7 @@
         <ul>
             <div class="row">  
             {% for enrollment in user_enrollments reversed %}
-             <div class="col-lg-3 ">
+             <div class="col-lg-4 ">
                 <div class="course-box d-flex aos" data-aos="fade-up">
                     <div class="product shadow-lg">
                     <div class="product-img">
@@ -38,20 +38,7 @@
                         </div>
                     </div>
                     <div class="product-content">
-                        <div class="course-group d-flex">
-                        <!-- <div class="course-group-img d-flex">
-                            <img
-                                src="{{enrollment.course.author.image.url}}"
-                                alt="{{enrollment.course.author.name}}"
-                                class="img-fluid"
-                            />
-                            <div class="course-name">
-                            <h4>
-                                <a href="instructor-profile.html">{{enrollment.course.author.name}}</a>
-                            </h4>
-                            <p>{{enrollment.course.author.designation}}</p>
-                            </div>
-                        </div>                       -->
+                        <div class="course-group d-flex">                      
                         <div class="course-group-img d-flex">
                             {% if enrollment.course.author.slug %}
                                 <a href="{% url 'author_details' enrollment.course.author.slug %}">
@@ -71,8 +58,7 @@
                                     <p>{{ enrollment.course.author.designation }}</p>
                                 </div>
                             {% endif %}
-                        </div>
-                        
+                        </div>                        
                     </div>
                         <h3 class="title instructor-text">
                         <a href="{% url 'course_playlist' course_slug=enrollment.course.slug %}"
