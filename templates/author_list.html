@@ -2,52 +2,13 @@
 {% load static %}
 {% block title %}Teacher's Page{% endblock title %} 
 {% block content %}
-<style>
-    .author-card {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        text-align: left;
-        background-color: #f8f9fa;
-        padding: 10px;
-        border-radius: 10px;
-        transition: background-color 0.3s;
-    }
 
-    .author-card:hover {
-        background-color: #e0e0e0;
-    }
-
-    .author-card img {
-        width: 150px;
-        height: 150px;
-        border-radius: 10%;
-        margin-right: 20px;
-    }
-
-    .author-details {
-        flex-grow: 1;
-    }
-
-    @media (max-width: 768px) {
-        .author-card {
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .author-card img {
-            margin-right: 0;
-            margin-bottom: 10px;
-        }
-    }
-</style>
 
 <div class="container" style="margin-top: 150px;">
     <h1>All Lecturer's ({{ author_count }})</h1>
     <hr>
     <div class="row">
-        {% for author in authors %}
+        {% for author in authors  %}
             <div class="col-md-6 mb-3 ">
                 <a href="{% url 'author_details' author.slug %}" class="author-card text-decoration-none shadow-lg">
                     <!-- Left side (Image) -->
