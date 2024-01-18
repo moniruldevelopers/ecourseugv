@@ -5,6 +5,11 @@ from django.http import HttpResponse
 from import_export.admin import ImportExportModelAdmin
 from django.utils.translation import gettext as _
 from reportlab.pdfgen import canvas
+
+#my customizations
+admin.site.site_header = "UGV COURSES ADMIN PANEL"
+admin.site.site_title = "UGV COURSES ADMIN PANEL"
+admin.site.index_title = "Welcome to UGV COURSES  PORTAL"
 # Register your models here.
 class VideoInline(admin.TabularInline):
     model = Video
@@ -13,7 +18,8 @@ class CourseAdmin(admin.ModelAdmin):  # Inherit from ImportExportModelAdmin
     inlines = [VideoInline]
     list_filter = ['author', 'category']
     search_fields = ['title', 'author__name']
-    list_display = ['author', 'category', 'title']  
+    list_display = ['author', 'category', 'title']
+    list_per_page=100 
 
 admin.site.register(Course, CourseAdmin)
 
@@ -23,7 +29,7 @@ admin.site.register(Category)
 
 class EnrollmentAdmin(ImportExportModelAdmin):
     list_display = ["approved", "phone_number", "transaction_id","batch_no", "course_price", "user", "student_id", "department", "semester", "course"]
-
+    list_per_page=200 
     
     list_filter = ["batch_no","approved", "department", "semester", "course"]
 
