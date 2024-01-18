@@ -6,6 +6,10 @@ from import_export.admin import ImportExportModelAdmin
 from django.utils.translation import gettext as _
 from reportlab.pdfgen import canvas
 
+
+from django.utils.html import format_html
+
+
 #my customizations
 admin.site.site_header = "UGV COURSES ADMIN PANEL"
 admin.site.site_title = "UGV COURSES ADMIN PANEL"
@@ -15,11 +19,16 @@ class VideoInline(admin.TabularInline):
     model = Video
 
 class CourseAdmin(admin.ModelAdmin):  # Inherit from ImportExportModelAdmin
+    def display_banner(self, obj):
+        return format_html('<img src="{}" width="100" height="auto" />', obj.banner.url)
+
+    display_banner.short_description = 'banner'
     inlines = [VideoInline]
     list_filter = ['author', 'category']
     search_fields = ['title', 'author__name']
-    list_display = ['author', 'category', 'title']
+    list_display = [ 'title','author', 'category','display_banner']
     list_per_page=100 
+
 
 admin.site.register(Course, CourseAdmin)
 
