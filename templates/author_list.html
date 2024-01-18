@@ -1,24 +1,46 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% load static %}
-{% block title %}Teacher's Page
-{%endblock title %} {% block content %}
+{% block title %}Teacher's Page{% endblock title %} 
+{% block content %}
 <style>
     .author-card {
         display: flex;
         align-items: center;
-        justify-content: space-between;  /* Keep space between left and right */
+        justify-content: space-between;
         text-align: left;
         background-color: #f8f9fa;
-        padding: 10px;  /* 10px for top, bottom, left, and right */
+        padding: 10px;
         border-radius: 10px;
         transition: background-color 0.3s;
     }
 
     .author-card:hover {
-        background-color: #e0e0e0;  /* Change the color for the hover effect */
+        background-color: #e0e0e0;
     }
 
-   
+    .author-card img {
+        width: 150px;
+        height: 150px;
+        border-radius: 10%;
+        margin-right: 20px;
+    }
+
+    .author-details {
+        flex-grow: 1;
+    }
+
+    @media (max-width: 768px) {
+        .author-card {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .author-card img {
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+    }
 </style>
 
 <div class="container" style="margin-top: 150px;">
@@ -26,17 +48,17 @@
     <hr>
     <div class="row">
         {% for author in authors %}
-            <div class="col-md-4 mb-3  "   style="display: flex; align-items: center; justify-content: center;">
-                <a href="{% url 'author_details' author.slug %}" class="author-card text-decoration-none shadow-sm">
+            <div class="col-md-6 mb-3 ">
+                <a href="{% url 'author_details' author.slug %}" class="author-card text-decoration-none shadow-lg">
                     <!-- Left side (Image) -->
-                    <div style="flex-shrink: 0; margin-right: 20px;">
-                        <img style="width: 150px; height: 150px; border-radius: 10%; " src="{{ author.image.url }}" alt="{{ author.name }} Image">
+                    <div>
+                        <img src="{{ author.image.url }}" alt="{{ author.name }} Image">
                     </div>
 
                     <!-- Right side (Name and Designation) -->
-                    <div>
-                        <h1 style="font-size: 24px; margin-bottom: 10px;">{{ author.name }}</h1>
-                        <h6 style="font-size: 18px; color: #777;">{{ author.designation }}</h6>
+                    <div class="author-details">
+                        <h3>{{ author.name }}</h3>
+                        <h6>{{ author.designation }}</h6>
                         <h6>{{ author.phone_number }}</h6>
                         <h6>{{ author.email }} </h6>
                         <span>Total Courses: {{ author.total_courses }} </span>
@@ -46,11 +68,4 @@
         {% endfor %}
     </div>
 </div>
-
-
-
-
-
-
-
 {% endblock content %}

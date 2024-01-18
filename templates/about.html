@@ -1,21 +1,46 @@
-{% extends 'base.html' %} {% load static %}
+{% extends 'base.html' %}
+{% load static %}
 {% block title %} About page{%endblock title %}
- 
+
 {% block content %}
 <style>
   .author-card {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Keep space between left and right */
+    justify-content: space-between;
     text-align: left;
     background-color: #f8f9fa;
-    padding: 10px; /* 10px for top, bottom, left, and right */
+    padding: 10px;
     border-radius: 10px;
     transition: background-color 0.3s;
   }
 
   .author-card:hover {
-    background-color: #e0e0e0; /* Change the color for the hover effect */
+    background-color: #e0e0e0;
+  }
+
+  .author-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10%;
+    margin-right: 20px;
+  }
+
+  .author-details {
+    flex-grow: 1;
+  }
+
+  @media (max-width: 768px) {
+    .author-card {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .author-card img {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
   }
 </style>
 
@@ -30,30 +55,17 @@
   <hr />
   <div class="row">
     {% for person in teams reversed %}
-    <div
-      class="col-md-6 mb-3"
-      style="display: flex; align-items: center; justify-content: center"
-    >
-      <a
-        href="{{ person.fb }}"
-        class="author-card text-decoration-none shadow-sm"
-      >
+    <div class="col-md-6 mb-3">
+      <a href="{{ person.fb }}" class="author-card text-decoration-none shadow-sm">
         <!-- Left side (Image) -->
-        <div style="flex-shrink: 0; margin-right: 20px">
-          <img
-            style="width: 150px; height: 150px; border-radius: 10%"
-            src="{{ person.image.url }}"
-            alt="{{ person.name }} Image"
-          />
+        <div>
+          <img src="{{ person.image.url }}" alt="{{ person.name }} Image">
         </div>
         <!-- Right side (Name and Designation) -->
-        <div>
-          <h1 style="font-size: 24px; margin-bottom: 10px">
-            {{ person.name }}
-          </h1>
+        <div class="author-details">
+          <h1 style="font-size: 24px; margin-bottom: 10px">{{ person.name }}</h1>
           <p>{{ person.designation }}</p>
           <p><i class="fa-solid fa-phone-volume"></i> {{ person.phone_number }}</p>
-          
           <p><i class="fa-solid fa-envelope"></i> {{ person.email}}</p>
           <p><i class="fa-brands fa-facebook"></i> Facebook</p>
         </div>
