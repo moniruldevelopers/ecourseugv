@@ -99,7 +99,7 @@ def enroll(request, slug):
     course = Course.objects.get(slug=slug)
 
     if request.method == 'POST':
-        form = EnrollmentForm(request.POST)
+        form = EnrollmentForm(request.POST, request.FILES)
         if form.is_valid():
             enrollment = form.save(commit=False)
             enrollment.user = request.user

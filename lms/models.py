@@ -143,6 +143,10 @@ class Enrollment(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    portal_screenshot =models.FileField(
+        upload_to='portal_screenshot/',       
+        validators=[FileExtensionValidator(allowed_extensions=['png','jpeg','jpg','gif','heif','heic'])]
+    )
     student_id = models.CharField(max_length=20)
     transaction_id = models.CharField(max_length=50, unique=True)
     phone_regex = RegexValidator(

@@ -33,7 +33,7 @@
                     </div>
                 {% else %}
                     <!-- Handle the case where author.slug is empty or None -->
-                    <img src="{{ course.author.image.url }}" alt="{{ course.author.name }}" class="img-fluid" />
+                    <img style="height: 20px;" src="{{ course.author.image.url }}" alt="{{ course.author.name }}" class="img-fluid" />
                     <div class="course-name">
                         <h4>{{ course.author.name }}</h4>
                         <p>{{ course.author.designation }}</p>
