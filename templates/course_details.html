@@ -224,14 +224,33 @@
               </div>
             </div>
 
+            <!-- Related Courses Section -->
+         
             <div class="card feature-sec">
               <div class="card-body">
-                <!-- codewill be here  -->
-                
-
+                  <div class="cat-title">
+                      <h4>Related Courses</h4>
+                  </div>
+                  {% if related_courses %}
+                      <div class="list-group">
+                          {% for related_course in related_courses %}
+                              <a href="{% url 'course_details' slug=related_course.slug %}" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between" style="height: 80px;">
+                                  <div class="d-flex align-items-center">
+                                      <img src="{{ related_course.banner.url }}" alt="{{ related_course.title }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px; transition: transform 0.3s;">
+                                      <p class="mb-0 ms-2" style="font-size: 12px;">{{ related_course.title }}</p>
+                                  </div>
+                              </a>
+                          {% endfor %}
+                      </div>
+                  {% else %}
+                      <p>No related courses found.</p>
+                  {% endif %}
               </div>
-            </div>
-
+          </div>
+          
+          
+          
+          
 
           </div>
         </div>

@@ -70,16 +70,19 @@ def courses(request):
         'paginator': paginator,      
     }
     return render (request, 'courses.html', context)
+
 @login_required(login_url='profile')
 def course_details(request, slug):   
     course = Course.objects.get(slug=slug)
     enrollments = Enrollment.objects.filter(user=request.user, course=course)
     total_enroll = Enrollment.objects.filter(course=course)
     total_enrolled_students = total_enroll.count()
+    related_courses = Course.objects.filter(category=course.category).exclude(slug=slug)[:5]
     context = {
         'course': course,
         'enrollments': enrollments,
         'total_enrolled_students':total_enrolled_students,
+        'related_courses':related_courses,
     }
     
     return render(request, 'course_details.html', context)

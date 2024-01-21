@@ -36,7 +36,10 @@ class Category(models.Model):
  
 class Author(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    image = models.ImageField(upload_to='author_images/')
+    image = models.ImageField(
+        upload_to='author_images/',
+        validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])]
+        )
     designation = models.CharField(max_length=150)
     phone_regex = RegexValidator(
         regex=r'^\+?1?\d{9,15}$',  # Example regex for international phone numbers
@@ -81,7 +84,10 @@ class Course(models.Model):
     skill_level = models.CharField(max_length=50, choices=SKILL_CHOICES, default=BASIC)
     language = models.CharField(max_length=20, choices=LANGUAGE_CHOOSE, default=BANGLA)
     course_details = RichTextField()
-    banner = models.ImageField(upload_to='courses_banner/')
+    banner = models.ImageField(
+        upload_to='courses_banner/',
+        validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])]
+        )
     price = models.PositiveIntegerField(default=0)
     created_date = models.DateTimeField(auto_now_add=True)
    
