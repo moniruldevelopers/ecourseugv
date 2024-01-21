@@ -41,7 +41,7 @@ def home(request):
     total_course = course.count()
     enrollments = Enrollment.objects.filter(approved=True)
     total_enrolled_students = enrollments.count()
-    courses = Course.objects.order_by('-created_date')[:6]
+    courses = Course.objects.order_by('-created_date')[:9]
     context = {
         'total_enrolled_students':total_enrolled_students,
         'total_course': total_course,
@@ -54,7 +54,7 @@ def home(request):
 def courses(request):
     queryset = Course.objects.order_by('-created_date')
     page = request.GET.get('page',1)
-    paginator = Paginator(queryset,6)
+    paginator = Paginator(queryset,9)
     try:
         courses = paginator.page(page)
     except EmptyPage:
