@@ -67,7 +67,9 @@ textarea {
       <address>874 University of Global Village(UGV, 322 C and B Rd, Barishal 8200)</address>
       <p>Email: ugvbarisal@gmail.com
       </p>
-      <p><i class="fa fa-phone"></i>  01877-774050</p>
+      {% for site in siteinfo %}
+      <p><i class="fa fa-phone"></i>  {{site.phone}}</p>
+      {% endfor %}
       <p><i class="fa fa-globe"></i> <a href="https://ugv.edu.bd/">https://ugv.edu.bd/</a> </p>
     
       
