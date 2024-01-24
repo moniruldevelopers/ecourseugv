@@ -191,8 +191,12 @@ class Wishlist(models.Model):
 # end wish list code 
 
 class Team(models.Model):
-    name=models.CharField(max_length=50)
-    image = models.ImageField(upload_to='Teams_members/')
+    name=models.CharField(max_length=50)    
+    image = models.ImageField(
+        upload_to='Teams_members/',
+        validators=[FileExtensionValidator(allowed_extensions=['png','jpeg','jpg'])]
+        
+        )
     designation=models.CharField(max_length=50)
     phone_regex = RegexValidator(
         regex=r'^\+?1?\d{9,15}$',  # Example regex for international phone numbers
@@ -217,3 +221,18 @@ class Contact(models.Model):
     def __str__(self):
         return self.name
     
+class SiteInfo(models.Model):
+    site_name = models.CharField(max_length=50)
+    site_logo = models.ImageField(
+        upload_to="site_logo/",
+        validators=[FileExtensionValidator(allowed_extensions=['png','jpeg','jpg'])]
+
+        )
+    phone_regex = RegexValidator(
+        regex=r'^\+?1?\d{9,15}$', 
+        message="Phone number must be entered in the format: '+088'. Up to 15 digits allowed."
+    )
+    phone = models.CharField(validators=[phone_regex], max_length=15)
+
+    def __str__(self):
+        return self.site_name

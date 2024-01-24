@@ -85,6 +85,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 # my project context processors
                 'lms.context_processors.get_all_categories',
+                'lms.context_processors.siteinfo',
                
           
 

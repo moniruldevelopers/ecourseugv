@@ -1,4 +1,4 @@
-from .models import Course, Author, Category
+from .models import Course, Author, Category,SiteInfo
 
 def get_all_categories(request):
     categories = Category.objects.all()
@@ -14,5 +14,11 @@ def get_all_categories(request):
     return context
 
 
+def siteinfo(request):
+    siteinfo = SiteInfo.objects.all()
+    context ={
+        'siteinfo': siteinfo,
+    }
+    return context
 
 

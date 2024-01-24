@@ -15,6 +15,9 @@ admin.site.site_header = "UGV COURSES ADMIN PANEL"
 admin.site.site_title = "UGV COURSES ADMIN PANEL"
 admin.site.index_title = "Welcome to UGV COURSES  PORTAL"
 # Register your models here.
+
+admin.site.register(SiteInfo)
+
 class VideoInline(admin.TabularInline):
     model = Video
 

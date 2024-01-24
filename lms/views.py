@@ -52,6 +52,8 @@ def home(request):
 
 
 def courses(request):
+    course = Course.objects.all()
+    total_course = course.count()
     queryset = Course.objects.order_by('-created_date')
     page = request.GET.get('page',1)
     paginator = Paginator(queryset,9)
@@ -67,7 +69,8 @@ def courses(request):
 
     context = {
         'courses': courses,
-        'paginator': paginator,      
+        'paginator': paginator,   
+        'total_course':total_course,   
     }
     return render (request, 'courses.html', context)
 
