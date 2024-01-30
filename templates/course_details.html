@@ -109,7 +109,11 @@
                         </p>
                         {% if video.is_preview %}
                           <div>
-                            <a href="javascript:;" class="video-preview" data-src="{{ video.video_file.url }}">Preview</a>
+                            <a style="text-decoration: none;" href="javascript:;" class="video-preview" data-src="{{ video.video_file.url }}">Preview <i class="fa fa-unlock"></i></a>
+                          </div>
+                        {% else %}
+                          <div>
+                           <a href="javascript:;" title="please enroll this course to view"><i class="fa fa-lock"></i></a>
                           </div>
                         {% endif %}
                       </li>
