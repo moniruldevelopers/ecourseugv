@@ -151,8 +151,8 @@ SITE_ID = 1
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'monirulislam4103@gmail.com'
-EMAIL_HOST_PASSWORD = 'tpml wrtf ikpz tgya'  
+EMAIL_HOST_USER = 'monirul.developers@gmail.com'
+EMAIL_HOST_PASSWORD = 'gupr qhht yjfh hpjv'  
 
 # Authentication
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # Set email verification to mandatory

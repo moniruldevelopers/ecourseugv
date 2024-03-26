@@ -8,12 +8,11 @@ from allauth.account.views import LoginView
 
 
 
-from django.conf.urls import handler404, handler500
+from django.conf.urls import handler404
 from lms.views import handler404 as custom_handler404
-from lms.views import handler500 as custom_handler500
+
 
 handler404 = custom_handler404
-handler500 = custom_handler500
 
 
 urlpatterns = [
