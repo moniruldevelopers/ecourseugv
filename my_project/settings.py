@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'crispy_forms',
     'crispy_bootstrap5', 
-    'django_cleanup.apps.CleanupConfig', # should go after your apps
+    'django_cleanup.apps.CleanupConfig', 
     'import_export',
 ]
 
@@ -152,7 +152,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'monirul.developers@gmail.com'
-EMAIL_HOST_PASSWORD = 'epqw wpek pxac rvsx'  
+EMAIL_HOST_PASSWORD = 'oekb cazk evfu ujct'  
 
 # Authentication
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # Set email verification to mandatory
