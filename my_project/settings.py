@@ -47,6 +47,10 @@ INSTALLED_APPS = [
     'import_export',
 ]
 
+
+SILENCED_SYSTEM_CHECKS = ["ckeditor.W001"]
+
+
 LOGIN_REDIRECT_URL = '/'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
@@ -152,7 +156,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'monirul.developers@gmail.com'
-EMAIL_HOST_PASSWORD = 'oekb cazk evfu ujct'  
+EMAIL_HOST_PASSWORD = 'fwjt vspc bobs wgvd'  
 
 # Authentication
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # Set email verification to mandatory
