@@ -1,107 +1,58 @@
+
+{% load static %}
+
+
 <style>
-  /* Add your custom styles for the modal */
-  .modal {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: white;
-      padding: 20px;
-      border: 1px solid #ccc;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
-  }
+    .notification {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background-color: #4CAF50; /* Green background */
+        color: white; /* White text */
+        border: 1px solid #388E3C; /* Darker green border */
+        padding: 5px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        opacity: 1;
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        transform: translateY(-10px);
+        
+    }
 
-  /* Add your overlay styles */
-  .overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-  }
-
-  .alert-container {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1000;
-  }
-
-  .alert {
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .alert-success {
-      background-color: #d4edda;
-      border-color: #c3e6cb;
-      color: #155724;
-  }
-
-  .alert-danger {
-      background-color: #f8d7da;
-      border-color: #f5c6cb;
-      color: #721c24;
-  }
+    .notification.hidden {
+        opacity: 0;
+        transform: translateY(0px);
+    }
 </style>
 
 
-<!-- Your content goes here -->
-
-<!-- Alert Container -->
-<div class="alert-container">
-{% for message in messages %}
-  {% if message.tags == "error" %}
-      <div class="alert alert-danger" onclick="showPopup('{{ message }}')">  
-          {{ message }}
-      </div>
-  {% else %}
-      <div class="alert alert-success" onclick="showPopup('{{ message }}')">
-          {{ message }}
-      </div>
-  {% endif %}
-{% endfor %}
+{% if messages %}
+<div  id="notification-container">
+    {% for message in messages %}
+        <div class="notification">{{ message }}</div>
+    {% endfor %}
 </div>
+{% endif %}
 
-<!-- Modal -->
-<div id="popup-box" class="modal">
-<p id="popup-message"></p>
-<button onclick="closePopup()">Close</button>
-</div>
 
-<!-- Overlay -->
-<div id="overlay" class="overlay" onclick="closePopup()"></div>
 
-<!-- Include your other scripts or frameworks here -->
-<!-- Include your other scripts or frameworks here -->
 <script>
-    // Function to show the pop-up box with a message
-    function showPopup(message) {
-      // Set the message text
-      document.getElementById('popup-message').innerText = message;
-    
-      // Show the overlay and modal
-      document.getElementById('overlay').style.display = 'block';
-      document.getElementById('popup-box').style.display = 'block';
-    
-      // Automatically close the pop-up box after 2 seconds (2000 milliseconds)
-      setTimeout(function() {
-        closePopup();
-      }, 2000);
-    }
-    
-    // Function to close the pop-up box
-    function closePopup() {
-      // Hide the overlay and modal
-      document.getElementById('overlay').style.display = 'none';
-      document.getElementById('popup-box').style.display = 'none';
-    }
-    </script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var notifications = document.querySelectorAll('.notification');
+
+        function hideNotification(notification) {
+            notification.classList.add('hidden');
+            setTimeout(function() {
+                notification.remove();
+            }, 500); // Match this with the duration of the CSS transition
+        }
+
+        notifications.forEach(function(notification) {
+            setTimeout(function() {
+                hideNotification(notification);
+            }, 1000); // Display each notification for 3 seconds
+        });
+    });
+</script>
+
     
